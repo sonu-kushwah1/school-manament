@@ -1,0 +1,15 @@
+{
+  "emp_list": [
+    {
+      "id": "1",
+      "fname": "Yuvraj",
+      "lname": "Kushwah",
+      "gender": "Male",
+      "emp_id": "5",
+      "dob": "2020-02-18",
+      "email": "sonukushwah362@gmail.com",
+      "phone": "8358957395",
+      "address": "Anand Nagar"
+    }
+  ]
+}

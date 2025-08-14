@@ -1,0 +1,328 @@
+{
+  "emp_list_test": [
+    {
+      "fname": "sonu",
+      "lname": "sahu",
+      "gender": "Male",
+      "dob": "",
+      "emp_id": "EMP2",
+      "email": "sandeep@gmail.com",
+      "phone": "8358957395",
+      "des": "Software Engineer",
+      "address": "Anand Nagar\n140",
+      "gross_salary": 28222,
+      "pf_percent": 0,
+      "pf_amount": 0,
+      "net_salary": 28222,
+      "id": "1"
+    },
+    {
+      "id": "d23f",
+      "fname": "sandeep ",
+      "lname": "Sahu",
+      "gender": "Male",
+      "dob": "2025-08-14",
+      "emp_id": "EMP2",
+      "email": "sandeep@gmail.com",
+      "phone": "8358957395",
+      "des": "Senior Software Engineer",
+      "address": "Anand Nagar\n140",
+      "gross_salary": "34000.00",
+      "pf_percent": "12.00",
+      "display_id": 2,
+      "salary": "",
+      "increment_salary": "4000",
+      "computed": {
+        "increment_amount": "4000.00",
+        "pf_amount": "4080.00",
+        "net_salary": "29920.00"
+      }
+    },
+    {
+      "id": "3ccd",
+      "fname": "Hemant",
+      "lname": "Mandeliya",
+      "gender": "Male",
+      "dob": "2025-08-15",
+      "emp_id": "EMP3",
+      "email": "hemant@gmail.com",
+      "phone": "8358957395",
+      "des": "Senior Software Engineer",
+      "address": "Anand Nagar\n140",
+      "gross_salary": "45000.00",
+      "pf_percent": "11.00",
+      "display_id": 3,
+      "salary": "",
+      "increment_salary": "5000",
+      "computed": {
+        "increment_amount": "5000.00",
+        "pf_amount": "4950.00",
+        "net_salary": "40050.00"
+      }
+    },
+    {
+      "id": "a43b",
+      "fname": "mandeep",
+      "lname": "vais",
+      "gender": "Male",
+      "dob": "2025-08-13",
+      "emp_id": "EMP4",
+      "email": "mandeep@gmail.com",
+      "phone": "25888",
+      "des": "Associate Software Engineer",
+      "address": "Anand Nagar\n140",
+      "gross_salary": "27000.00",
+      "pf_percent": "11.00",
+      "display_id": 4
+    },
+    {
+      "id": "b711",
+      "fname": "Ashutosh",
+      "lname": "Sanger",
+      "gender": "Male",
+      "dob": "2025-08-14",
+      "emp_id": "EMP6",
+      "email": "ashutosh@gmail.com",
+      "phone": "8358957395",
+      "des": "Associate Software Engineer",
+      "address": "Anand Nagar\n140",
+      "gross_salary": "18000.00",
+      "pf_percent": "12.00"
+    }
+  ],
+  "emp_list": [
+    {
+      "emp_id": "5",
+      "fname": "Yuvraj",
+      "lname": "Kushwah",
+      "salary": "30000",
+      "gender": "male",
+      "dob": "20-02-2020",
+      "email": "yuv@gmail.com",
+      "address": "Anand Nagar",
+      "phone": "8358957395",
+      "salary_increment": "10",
+      "pf_increment": "12",
+      "insurance_increment": "1000",
+      "des": "Software Engineer",
+      "computed": {
+        "salary_increment_amount": "3000.00",
+        "total_salary": "33000.00",
+        "pf_increment_amount": "3600.00",
+        "insurance_increment_amount": "300000.00"
+      },
+      "id": "1"
+    },
+    {
+      "emp_id": "101",
+      "fname": "sonu",
+      "salary": "20000",
+      "salary_increment": "20",
+      "des": "Senior Software Engineer",
+      "computed": {
+        "salary_increment_amount": "4000.00",
+        "total_salary": "24000.00",
+        "pf_increment_amount": "0.00",
+        "insurance_increment_amount": "0.00"
+      },
+      "id": "91e9"
+    }
+  ],
+  "salary_records": [
+    {
+      "id": "1",
+      "emp_id": "5",
+      "month": "2025-07",
+      "salary": 30000,
+      "incentive": 2000,
+      "insurance": 500,
+      "pf": 3600,
+      "bonus": 0,
+      "net_salary": 28900
+    }
+  ],
+  "teacher_list": [
+    {
+      "id": "1",
+      "fname": "sonu",
+      "lname": "kushwah",
+      "gender": "Male",
+      "email": "sonu@gmail.com",
+      "dob": "2025-08-07",
+      "address": "Anand Nagar\n140",
+      "city": "gwalior",
+      "univercity": "MCRPV Univercity",
+      "degree": "B.Ed",
+      "subject": "Hindi",
+      "phone": 8358957395
+    },
+    {
+      "id": "8a08",
+      "fname": "Madhu",
+      "lname": "Kushwah",
+      "gender": "Female",
+      "email": "madhu@gmail.com",
+      "dob": "2025-07-30",
+      "address": "Anand Nagar\n140",
+      "city": "gwalior",
+      "univercity": "Jiwaji Univercity",
+      "degree": "B.Ed",
+      "subject": "English",
+      "phone": 8358957395
+    }
+  ],
+  "transport_list": [
+    {
+      "id": "1",
+      "rname": "Sheel Nagar",
+      "vname": "MT988800",
+      "dname": "Shohel Khan",
+      "licens_no": "DLNC025936",
+      "phone_no": "7879625898"
+    }
+  ],
+  "student_list": [
+    {
+      "id": "1",
+      "fname": "Yuvraj",
+      "lname": "Kushwah",
+      "gender": "Male",
+      "roll_no": "5",
+      "dob": "2020-02-18",
+      "blood_group": "B+",
+      "religion": "Hindu",
+      "email": "sonukushwah362@gmail.com",
+      "class": "U.K.G",
+      "fees": "11000",
+      "admission_id": "S101",
+      "phone": "8358957395",
+      "address": "Anand Nagar",
+      "image": "https://img.freepik.com/free-photo/sky-clouds-cinematic-clouds-wallpaper-5_1562-742.jpg?t=st=1738734966~exp=1738738566~hmac=3b14fa2e155366f358e7177efe2ea9bc0a805e6f04be9c3931168ee58622906a&w=740"
+    },
+    {
+      "id": "180a",
+      "fname": "Manvi",
+      "lname": "kushwah",
+      "gender": "Female",
+      "dob": "2025-07-30",
+      "roll_no": "101",
+      "blood_group": "B+",
+      "religion": "Hindu",
+      "email": "manvi@gmail.com",
+      "class": "Nursery",
+      "fees": 10000,
+      "admission_id": "101",
+      "phone": "9893157832",
+      "address": "Anand Nagar\n140",
+      "image": "",
+      "dueFees": 6000,
+      "submitFees": 4000
+    },
+    {
+      "id": "6944",
+      "fname": "Ram",
+      "lname": "Sharma",
+      "gender": "Male",
+      "dob": "2025-07-30",
+      "roll_no": "101",
+      "blood_group": "A+",
+      "religion": "Hindu",
+      "email": "ram@gmail.com",
+      "class": "U.K.G",
+      "fees": "11000",
+      "admission_id": "101",
+      "phone": "12325566",
+      "address": "Anand Nagar\n140"
+    }
+  ],
+  "fees_list": [
+    {
+      "id": "1",
+      "class": "L.K.G",
+      "fees": "12000"
+    },
+    {
+      "id": "5b44",
+      "fees": "14000",
+      "class": "2nd",
+      "vname": "d",
+      "display_id": 2
+    },
+    {
+      "id": "4b8c",
+      "class": "1st",
+      "fees": "15000"
+    },
+    {
+      "id": "5703",
+      "class": "4th",
+      "fees": "16000",
+      "display_id": 4
+    },
+    {
+      "id": "f3f9",
+      "class": "3rd",
+      "fees": "17000",
+      "display_id": 5
+    },
+    {
+      "id": "efef",
+      "class": "Nursery",
+      "fees": "10000"
+    },
+    {
+      "id": "0de7",
+      "class": "U.K.G",
+      "fees": "11000"
+    },
+    {
+      "class": "5th",
+      "fees": "18000",
+      "id": "dcd9"
+    }
+  ],
+  "subject_list": [
+    {
+      "id": "1",
+      "subject": "Hindi"
+    },
+    {
+      "id": "2ce8",
+      "subject": "English"
+    }
+  ],
+  "des_list": [
+    {
+      "id": "1",
+      "des": "Associate Software Engineer"
+    },
+    {
+      "id": "4195",
+      "des": "Softwar Engineer"
+    },
+    {
+      "id": "110b",
+      "des": "Senior Softwar Engineer"
+    }
+  ],
+  "leave_list": [
+    {
+      "id": "f85a",
+      "employee_name": "Anjali Shrivastav",
+      "leave_type": "Earn Leave",
+      "start_date": "2025-08-14",
+      "end_date": "2025-08-15",
+      "reason": "Go to Marriage",
+      "status": "Approved"
+    },
+    {
+      "id": "ca9a",
+      "employee_name": "Nitin Verma",
+      "leave_type": "Composite Leave",
+      "start_date": "2025-08-14",
+      "end_date": "2025-08-17",
+      "reason": "I am go to Bhopal. Beacause my sister Marriage in Bhopal.",
+      "status": "Pending"
+    }
+  ]
+}

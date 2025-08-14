@@ -1,0 +1,43 @@
+{
+  "teacher_list": [
+    {
+      "id": "1",
+      "fname": "Yuvraj",
+      "lname": "Kushwah",
+      "gender": "Male",
+      "email": "sonukushwah362@gmail.com",
+      "phone": 8358957395,
+      "dob": "2020-02-18",
+      "address": "Anand Nagar",
+      "city": "gwalior",
+      "univercity": "Jiwaji Univercity",
+      "degree": "B.Ed"
+    },
+    {
+      "id": "4154",
+      "fname": "Priyayank",
+      "lname": "santodi",
+      "gender": "Male",
+      "email": "priya@gmail.com",
+      "phone": 8358957395,
+      "dob": "2025-07-31",
+      "address": "Anand Nagar\n140",
+      "city": "gwalior",
+      "univercity": "Jiwaji Univercity",
+      "degree": "B.Ed"
+    },
+    {
+      "id": "0b86",
+      "fname": "nitin",
+      "lname": "sent",
+      "gender": "Male",
+      "email": "nitin@gmail.com",
+      "dob": "2025-07-31",
+      "address": "Anand Nagar\n140",
+      "city": "gwalior",
+      "univercity": "Jiwaji Univercity",
+      "degree": "B.Ed",
+      "phone": 8358957395
+    }
+  ]
+}
