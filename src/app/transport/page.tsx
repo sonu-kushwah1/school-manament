@@ -130,9 +130,7 @@ const Transport = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Transport</Typography>
-      <BasicBreadcrumbs currentPage="Transport" />
-
+      <BasicBreadcrumbs heading="Transport" currentPage="Transport" />
       <Box className="customBox">
         <Typography variant="h5">
           {isEditMode ? "Edit" : "Add New"} Transport

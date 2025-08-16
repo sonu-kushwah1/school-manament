@@ -1,12 +1,11 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   Grid,
   Paper,
   Avatar,
   Typography,
   Box,
-  Stack,
   Divider,
   IconButton,
   Tabs,
@@ -26,7 +25,12 @@ import LayoutWrapper from "@/component/Layout";
 import Fingerprint from "@mui/icons-material/Fingerprint";
 import EditSquareIcon from "@mui/icons-material/EditSquare";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import BasicModal from "@/component/modal";
+import { Button, Stack } from "@mui/material";
+
+import SimpleDialog from "@/component/modal";
+import BasicInput from "@/component/custom-input";
+import CustomButton from "@/component/button";
+import BankDetails from "./bank-details";
 
 // Info item reusable component
 type InfoItemProps = {
@@ -78,13 +82,7 @@ const Employees: React.FC = () => {
     setValue(newValue);
   };
 
-    const infoData = [
-    { label: "Level of Education", value: "Higher Education" },
-    { label: "Degree", value: "Electrical Engineering" },
-    { label: "Hard Skill", value: "Technical Support" },
-    { label: "Soft Skill", value: "Communication" },
-  ];
-   
+
   const educationData = [
     { label: "Hight School", value: "The Sait Vicent Hight Secondary School" },
     { label: "Hight Secondary", value: "Atit Bal Mandir " },
@@ -92,11 +90,11 @@ const Employees: React.FC = () => {
     { label: "Post Graduation", value: "Communication" },
   ];
 
-    const paySlipData = [
-    { label: "Level of Education", value: "Higher Education" },
-    { label: "Degree", value: "Electrical Engineering" },
-    { label: "Hard Skill", value: "Technical Support" },
-    { label: "Soft Skill", value: "Communication" },
+  const paySlipData = [
+    { label: "Basic Salary", value: "30,000" },
+    { label: "PF", value: "4000" },
+    { label: "ESI Insurance", value: "400" },
+    { label: "Net Salary", value: "26000" },
   ];
 
   
@@ -105,7 +103,8 @@ const Employees: React.FC = () => {
     <LayoutWrapper>
       <Typography variant="h5">Employees Profile</Typography>
       <BasicBreadcrumbs currentPage="Employees Profile" />
-       <BasicModal/>
+   
+
       <Box className="customBox">
         <Grid container spacing={2}>
           {/* Left Column */}
@@ -186,27 +185,15 @@ const Employees: React.FC = () => {
                     label="Mobile Phone"
                     value="+33254483540"
                   />
-                  <InfoItem
-                    icon={<LocationOnIcon />}
-                    label="Nationality"
-                    value="Singapore"
-                  />
+                 
                   <InfoItem icon={<WcIcon />} label="Gender" value="Male" />
                   <InfoItem
                     icon={<CalendarTodayIcon />}
-                    label="Age"
+                    label="DOB"
                     value="32"
                   />
-                  <InfoItem
-                    icon={<CheckCircleIcon color="success" />}
-                    label="Status"
-                    value="Active"
-                  />
-                  <InfoItem
-                    icon={<WorkIcon />}
-                    label="Type of Hire"
-                    value="Full Time in House"
-                  />
+                
+                 
                   <InfoItem
                     icon={<WorkIcon />}
                     label="Designation"
@@ -228,86 +215,16 @@ const Employees: React.FC = () => {
                 </Tabs>
               </Box>
               <CustomTabPanel value={value} index={0}>
-                <Paper sx={{padding:"15px",borderRadius:"15px",marginBottom:"30px"}}>
-                  <Stack direction="row" justifyContent="space-between">
-                    <Stack direction="row" alignItems="center" gap={1}>
-                      <AccountCircleIcon />
-                      <Typography variant="h6">
-                        Professtional Information
-                      </Typography>
-                    </Stack>
-                    <IconButton aria-label="fingerprint" color="success">
-                      <EditIcon />
-                    </IconButton>
-                  </Stack>
-                  <Box>
-                    {/* Information rows */}
-                    <Stack spacing={1.5}>
-                      {infoData.map((item, index) => (
-                        <React.Fragment key={index}>
-                          <Grid container>
-                            <Grid size={6}>
-                              <Typography
-                                variant="body2"
-                                color="text.secondary"
-                              >
-                                {item.label}
-                              </Typography>
-                            </Grid>
-                            <Grid size={6}>
-                              <Typography variant="body2" color="text.primary">
-                                {item.value}
-                              </Typography>
-                            </Grid>
-                          </Grid>
-                          {index !== infoData.length - 1 && <Divider />}
-                        </React.Fragment>
-                      ))}
-                    </Stack>
-                  </Box>
-                </Paper>
-
-                  <Paper sx={{padding:"15px",borderRadius:"15px"}}>
-                  <Stack direction="row" justifyContent="space-between">
-                    <Stack direction="row" alignItems="center" gap={1}>
-                      <AccountCircleIcon />
-                      <Typography variant="h6">
-                        Professtional Information
-                      </Typography>
-                    </Stack>
-                    <IconButton aria-label="fingerprint" color="success">
-                      <EditIcon />
-                    </IconButton>
-                  </Stack>
-                  <Box>
-                    {/* Information rows */}
-                    <Stack spacing={1.5}>
-                      {infoData.map((item, index) => (
-                        <React.Fragment key={index}>
-                          <Grid container>
-                            <Grid size={6}>
-                              <Typography
-                                variant="body2"
-                                color="text.secondary"
-                              >
-                                {item.label}
-                              </Typography>
-                            </Grid>
-                            <Grid size={6}>
-                              <Typography variant="body2" color="text.primary">
-                                {item.value}
-                              </Typography>
-                            </Grid>
-                          </Grid>
-                          {index !== infoData.length - 1 && <Divider />}
-                        </React.Fragment>
-                      ))}
-                    </Stack>
-                  </Box>
-                </Paper>
+                <BankDetails/>
               </CustomTabPanel>
               <CustomTabPanel value={value} index={1}>
-              <Paper sx={{padding:"15px",borderRadius:"15px",marginBottom:"30px"}}>
+                <Paper
+                  sx={{
+                    padding: "15px",
+                    borderRadius: "15px",
+                    marginBottom: "30px",
+                  }}
+                >
                   <Stack direction="row" justifyContent="space-between">
                     <Stack direction="row" alignItems="center" gap={1}>
                       <AccountCircleIcon />
@@ -322,7 +239,7 @@ const Employees: React.FC = () => {
                   <Box>
                     {/* Information rows */}
                     <Stack spacing={1.5}>
-                      {infoData.map((item, index) => (
+                      {educationData.map((item, index) => (
                         <React.Fragment key={index}>
                           <Grid container>
                             <Grid size={6}>
@@ -339,7 +256,7 @@ const Employees: React.FC = () => {
                               </Typography>
                             </Grid>
                           </Grid>
-                          {index !== infoData.length - 1 && <Divider />}
+                          {index !== educationData.length - 1 && <Divider />}
                         </React.Fragment>
                       ))}
                     </Stack>
@@ -347,13 +264,17 @@ const Employees: React.FC = () => {
                 </Paper>
               </CustomTabPanel>
               <CustomTabPanel value={value} index={2}>
-              <Paper sx={{padding:"15px",borderRadius:"15px",marginBottom:"30px"}}>
+                <Paper
+                  sx={{
+                    padding: "15px",
+                    borderRadius: "15px",
+                    marginBottom: "30px",
+                  }}
+                >
                   <Stack direction="row" justifyContent="space-between">
                     <Stack direction="row" alignItems="center" gap={1}>
                       <AccountCircleIcon />
-                      <Typography variant="h6">
-                        Payslips Information
-                      </Typography>
+                      <Typography variant="h6">Payslips Information</Typography>
                     </Stack>
                     <IconButton aria-label="fingerprint" color="success">
                       <EditIcon />
@@ -362,7 +283,7 @@ const Employees: React.FC = () => {
                   <Box>
                     {/* Information rows */}
                     <Stack spacing={1.5}>
-                      {infoData.map((item, index) => (
+                      {paySlipData.map((item, index) => (
                         <React.Fragment key={index}>
                           <Grid container>
                             <Grid size={6}>
@@ -379,7 +300,7 @@ const Employees: React.FC = () => {
                               </Typography>
                             </Grid>
                           </Grid>
-                          {index !== infoData.length - 1 && <Divider />}
+                          {index !== paySlipData.length - 1 && <Divider />}
                         </React.Fragment>
                       ))}
                     </Stack>

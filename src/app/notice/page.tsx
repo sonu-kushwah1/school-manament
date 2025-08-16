@@ -11,8 +11,7 @@ const Dashboard: React.FC = () => {
   return (
     <div>
       <LayoutWrapper>
-        <Typography variant="h6">Notice</Typography>
-        <BasicBreadcrumbs currentPage="Notice" />
+        <BasicBreadcrumbs heading="Notice" currentPage="Notice" />
         <Paper sx={{ p: 4 }}>
           <Typography variant="h5">Create A Notice</Typography>
           <Grid container spacing={2}>

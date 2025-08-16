@@ -8,8 +8,8 @@ const Dashboard: React.FC = () => {
   return (
     <div>
       <LayoutWrapper>
-        <Typography variant="h5">Setting</Typography>
-        <BasicBreadcrumbs currentPage="Setting" />
+      
+        <BasicBreadcrumbs heading="Setting" currentPage="Setting" />
       </LayoutWrapper>
     </div>
   );

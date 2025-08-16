@@ -74,8 +74,7 @@ const Leave: React.FC = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h6">Leave List User</Typography>
-      <BasicBreadcrumbs currentPage="Leave" />
+      <BasicBreadcrumbs heading="Leave List User" currentPage="Leave" />
       <Paper sx={{ p: 4 }}>
         <Typography variant="h5">Leave List User</Typography>
 

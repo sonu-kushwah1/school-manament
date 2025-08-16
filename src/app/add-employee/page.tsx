@@ -58,8 +58,8 @@ const Employees = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Add Employees</Typography>
-      <BasicBreadcrumbs currentPage="Add Employees" />
+    
+      <BasicBreadcrumbs heading="Add Employees" currentPage="Add Employees" />
 
       <Box className="customBox">
         <form onSubmit={handleSubmit}>

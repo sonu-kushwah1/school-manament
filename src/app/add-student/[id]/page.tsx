@@ -114,48 +114,122 @@ const Dashboard: React.FC = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Update Student Record</Typography>
-      <BasicBreadcrumbs currentPage="Update Student Record" />
-      <Paper className="innerWrapper" style={{ padding: "1.5rem", marginTop: "1rem" }}>
-      
+      <BasicBreadcrumbs
+        heading="Update Student Record"
+        currentPage="Update Student Record"
+      />
+      <Paper
+        className="innerWrapper"
+        style={{ padding: "1.5rem", marginTop: "1rem" }}
+      >
         <form onSubmit={handleSubmit}>
-          <Typography variant="h6" gutterBottom>Student Details</Typography>
+          <Typography variant="h6" gutterBottom>
+            Student Details
+          </Typography>
           <Grid container spacing={2}>
             <Grid size={3}>
-              <BasicInput label="First Name*" inputType="text" name="fname" value={student.fname} onChange={handleChange} />
+              <BasicInput
+                label="First Name*"
+                inputType="text"
+                name="fname"
+                value={student.fname}
+                onChange={handleChange}
+              />
             </Grid>
             <Grid size={3}>
-              <BasicInput label="Last Name*" inputType="text" name="lname" value={student.lname} onChange={handleChange} />
+              <BasicInput
+                label="Last Name*"
+                inputType="text"
+                name="lname"
+                value={student.lname}
+                onChange={handleChange}
+              />
             </Grid>
             <Grid size={3}>
-              <SelectInput label="Gender" value={student.gender} onChange={(val) => handleSelectChange("gender", val)} options={genderOptions} />
+              <SelectInput
+                label="Gender"
+                value={student.gender}
+                onChange={(val) => handleSelectChange("gender", val)}
+                options={genderOptions}
+              />
             </Grid>
             <Grid size={3}>
-              <BasicInput label="Date Of Birth*" inputType="date" name="dob" value={student.dob} onChange={handleChange} />
+              <BasicInput
+                label="Date Of Birth*"
+                inputType="date"
+                name="dob"
+                value={student.dob}
+                onChange={handleChange}
+              />
             </Grid>
             <Grid size={3}>
-              <BasicInput label="Roll No" inputType="text" name="roll_no" value={student.roll_no} onChange={handleChange} />
+              <BasicInput
+                label="Roll No"
+                inputType="text"
+                name="roll_no"
+                value={student.roll_no}
+                onChange={handleChange}
+              />
             </Grid>
             <Grid size={3}>
-              <SelectInput label="Blood Group" value={student.blood_group} onChange={(val) => handleSelectChange("blood_group", val)} options={bloodOptions} />
+              <SelectInput
+                label="Blood Group"
+                value={student.blood_group}
+                onChange={(val) => handleSelectChange("blood_group", val)}
+                options={bloodOptions}
+              />
             </Grid>
             <Grid size={3}>
-              <SelectInput label="Religion*" value={student.religion} onChange={(val) => handleSelectChange("religion", val)} options={religionOptions} />
+              <SelectInput
+                label="Religion*"
+                value={student.religion}
+                onChange={(val) => handleSelectChange("religion", val)}
+                options={religionOptions}
+              />
             </Grid>
             <Grid size={3}>
-              <BasicInput label="Email" inputType="email" name="email" value={student.email} onChange={handleChange} />
+              <BasicInput
+                label="Email"
+                inputType="email"
+                name="email"
+                value={student.email}
+                onChange={handleChange}
+              />
             </Grid>
             <Grid size={3}>
-              <SelectInput label="Class" value={student.class} onChange={(val) => handleSelectChange("class", val)} options={classOptions} />
+              <SelectInput
+                label="Class"
+                value={student.class}
+                onChange={(val) => handleSelectChange("class", val)}
+                options={classOptions}
+              />
             </Grid>
             <Grid size={3}>
-              <BasicInput label="Fees" inputType="text" name="fees" value={student.fees} onChange={handleChange}  />
+              <BasicInput
+                label="Fees"
+                inputType="text"
+                name="fees"
+                value={student.fees}
+                onChange={handleChange}
+              />
             </Grid>
             <Grid size={3}>
-              <BasicInput label="Admission ID" inputType="text" name="admission_id" value={student.admission_id} onChange={handleChange} />
+              <BasicInput
+                label="Admission ID"
+                inputType="text"
+                name="admission_id"
+                value={student.admission_id}
+                onChange={handleChange}
+              />
             </Grid>
             <Grid size={3}>
-              <BasicInput label="Phone" inputType="text" name="phone" value={student.phone} onChange={handleChange} />
+              <BasicInput
+                label="Phone"
+                inputType="text"
+                name="phone"
+                value={student.phone}
+                onChange={handleChange}
+              />
             </Grid>
 
             <Grid size={12}>
@@ -181,13 +255,26 @@ const Dashboard: React.FC = () => {
                 <img
                   src={student.image}
                   alt="Student"
-                  style={{ width: "80px", height: "80px", borderRadius: "50%", marginTop: "10px", objectFit: "cover" }}
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    borderRadius: "50%",
+                    marginTop: "10px",
+                    objectFit: "cover",
+                  }}
                 />
               )}
             </Grid>
 
             <Grid size={12}>
-              <CustomTextarea label="Address" placeholder="Write here..." minRows={3} name="address" value={student.address} onChange={handleChange} />
+              <CustomTextarea
+                label="Address"
+                placeholder="Write here..."
+                minRows={3}
+                name="address"
+                value={student.address}
+                onChange={handleChange}
+              />
             </Grid>
 
             <Grid size={12}>

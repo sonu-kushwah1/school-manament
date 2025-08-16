@@ -193,8 +193,7 @@ const filterTableData = (filterName: string, filterValue: string) => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Add Fees Submission</Typography>
-      <BasicBreadcrumbs currentPage="Add Fees Submission" />
+      <BasicBreadcrumbs heading="Add Fees Submission" currentPage="Add Fees Submission" />
 
       <Box className="customBox">
         <form onSubmit={handleSubmit}>

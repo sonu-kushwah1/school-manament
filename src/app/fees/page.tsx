@@ -17,7 +17,7 @@ const columns: GridColDef[] = [
   { field: "fees", headerName: "Fees", width: 250 },
 ];
 
-const Fees = () => {
+const FeesList = () => {
   const classOptions = [
     { label: "Nursery", value: "Nursery" },
     { label: "L.K.G", value: "L.K.G" },
@@ -144,8 +144,8 @@ const Fees = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Fees List in 2025</Typography>
-      <BasicBreadcrumbs currentPage="Fees List 2025l" />
+   
+      <BasicBreadcrumbs heading="Fees List" currentPage="Fees List 2025" />
 
       {/* Form */}
       <Box className="customBox">
@@ -214,4 +214,4 @@ const Fees = () => {
   );
 };
 
-export default Fees;
+export default FeesList;

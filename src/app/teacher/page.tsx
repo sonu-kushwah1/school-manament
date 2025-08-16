@@ -42,11 +42,7 @@ function Teacher() {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5" gutterBottom>
-        Teacher List
-      </Typography>
-      <BasicBreadcrumbs currentPage="Teacher List" />
-
+      <BasicBreadcrumbs heading="Teacher List"  currentPage="Teacher List" />
       {loading ? (
         <Typography sx={{ mt: 2 }}>Loading...</Typography>
       ) : error ? (

@@ -35,7 +35,6 @@ const Subject = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editId, setEditId] = useState<number | null>(null);
 
-
   // Fetch list
   const getAPI = async () => {
     try {
@@ -68,7 +67,10 @@ const Subject = () => {
     if (isEditMode && editId !== null) {
       // UPDATE existing record
       try {
-        await axios.put(`http://localhost:3001/subject_list/${editId}`, student);
+        await axios.put(
+          `http://localhost:3001/subject_list/${editId}`,
+          student
+        );
         alert("Subject record updated successfully!");
         setIsEditMode(false);
         setEditId(null);
@@ -119,8 +121,10 @@ const Subject = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Subject List in 2025</Typography>
-      <BasicBreadcrumbs currentPage="Subject List 2025l" />
+      <BasicBreadcrumbs
+        heading="Subject List in 2025"
+        currentPage="Subject List 2025"
+      />
 
       {/* Form */}
       <Box className="customBox">

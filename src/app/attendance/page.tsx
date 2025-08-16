@@ -10,8 +10,7 @@ const Dashboard: React.FC = () => {
   return (
     <div>
       <LayoutWrapper>
-        <Typography variant="h5">Attendace</Typography>
-        <BasicBreadcrumbs currentPage="Attendace" />
+        <BasicBreadcrumbs heading="Attendace" currentPage="Attendace" />
         <Box>
           <div className="custom-table-container attendance">
           <table className="custom-table">

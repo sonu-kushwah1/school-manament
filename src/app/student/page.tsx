@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import BasicBreadcrumbs from "@/component/BreadCrumb";
 import LayoutWrapper from "@/component/Layout";
@@ -58,27 +58,26 @@ function Student() {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5" gutterBottom>
-        Student
-      </Typography>
-      <BasicBreadcrumbs currentPage="Student" />
+      <BasicBreadcrumbs heading="Student List" currentPage="Student" />
 
-      {error ? (
-        <Typography color="error" sx={{ mt: 2 }}>
-          {error}
-        </Typography>
-      ) : student.length === 0 ? (
-        <Typography sx={{ mt: 2 }}>Loading...</Typography>
-      ) : (
-        <DataTable
-          columns={columns}
-          rows={student}
-          checkboxSelection
-          onView={(row) => router.push(`/studentDetails/${row.id}`)} // backend id
-          onEdit={(row) => router.push(`/add-student/${row.id}`)}    // backend id
-          onDelete={(row) => remove(row.id)}                         // backend id
-        />
-      )}
+      <Box className="customBox">
+        {error ? (
+          <Typography color="error" sx={{ mt: 2 }}>
+            {error}
+          </Typography>
+        ) : student.length === 0 ? (
+          <Typography sx={{ mt: 2 }}>Loading...</Typography>
+        ) : (
+          <DataTable
+            columns={columns}
+            rows={student}
+            checkboxSelection
+            onView={(row) => router.push(`/studentDetails/${row.id}`)} // backend id
+            onEdit={(row) => router.push(`/add-student/${row.id}`)} // backend id
+            onDelete={(row) => remove(row.id)} // backend id
+          />
+        )}
+      </Box>
     </LayoutWrapper>
   );
 }

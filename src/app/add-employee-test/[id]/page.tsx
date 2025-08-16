@@ -126,10 +126,8 @@ const UpdateEmployee = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5" sx={{ mb: 2 }}>
-        Update Employee
-      </Typography>
-      <BasicBreadcrumbs currentPage="Update Employee" />
+  
+      <BasicBreadcrumbs heading=" Update Employee" currentPage="Update Employee" />
       {error && (
         <Typography color="error" sx={{ mb: 2 }}>
           {error}

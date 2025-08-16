@@ -14,7 +14,13 @@
       "pf_percent": 0,
       "pf_amount": 0,
       "net_salary": 28222,
-      "id": "1"
+      "id": "1",
+      "bank_details": {
+        "bank_name": "HDFC Bank",
+        "account_number": "XXXXXXXX1234",
+        "ifsc": "HDFC0001234",
+        "branch": "Bhodapur"
+      }
     },
     {
       "id": "d23f",
@@ -88,6 +94,24 @@
       "address": "Anand Nagar\n140",
       "gross_salary": "18000.00",
       "pf_percent": "12.00"
+    }
+  ],
+  "emp_bank_details": [
+    {
+      "bank_name": "ICICI Bank",
+      "account_number": "40001858899",
+      "ifsc": "1015",
+      "branch_address": "Bhodapur",
+      "id": "1"
+    }
+  ],
+  "education_details": [
+    {
+      "bank_name": "ICICI Bank",
+      "account_number": "40001858899",
+      "ifsc": "1015",
+      "branch_address": "Bhodapur",
+      "id": "1"
     }
   ],
   "emp_list": [
@@ -289,6 +313,10 @@
     {
       "id": "2ce8",
       "subject": "English"
+    },
+    {
+      "id": "a067",
+      "subject": "Computer Science"
     }
   ],
   "des_list": [

@@ -127,9 +127,7 @@ const Employees = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Add Employee Test</Typography>
-      <BasicBreadcrumbs currentPage="Add Employees" />
-
+      <BasicBreadcrumbs heading="Add Employee Test" currentPage="Add Employees" />
       <Box className="customBox">
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>

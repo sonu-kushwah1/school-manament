@@ -77,8 +77,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">{leaveId ? "Edit Leave" : "Add New Leave"}</Typography>
-      <BasicBreadcrumbs currentPage={leaveId ? "Edit Leave" : "Add New Leave"} />
+      <BasicBreadcrumbs heading={leaveId ? "Edit Leave" : "Add New Leave"} currentPage={leaveId ? "Edit Leave" : "Add New Leave"} />
       <Paper className="innerWrapper" style={{ padding: "1.5rem", marginTop: "1rem" }}>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>

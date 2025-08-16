@@ -65,8 +65,7 @@ const Dashboard: React.FC = () => {
   return (
     <div>
       <LayoutWrapper>
-        <Typography variant="h5">Dashboard</Typography>
-        <BasicBreadcrumbs currentPage="Dashboard" />
+        <BasicBreadcrumbs heading="Dashboard" currentPage="Dashboard" />
 
         <Grid container spacing={2}>
           {DashboardData.map((item) => (

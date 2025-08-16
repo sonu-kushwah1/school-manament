@@ -184,7 +184,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
           onClick={() => toggleMenu("employees")}
         >
           <ListItemIcon>
-            <PersonIcon />
+            <PeopleAltIcon />
           </ListItemIcon>
           <ListItemText primary="Employees" />
           {openMenus.employees ? <ExpandLess /> : <ExpandMore />}
@@ -199,19 +199,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
           <List component="div">
             <ListItem
               component={Link}
-              href="/employees"
-              className={`menu-link ${
-                pathname === "/employees-list" ? "active" : ""
-              }`}
-              sx={{ height: "36px" }}
-            >
-              <ListItemIcon>
-                <InfoIcon />
-              </ListItemIcon>
-              <ListItemText primary="All Employees List Test" />
-            </ListItem>
-            <ListItem
-              component={Link}
               href="/employees-list-test"
               className={`menu-link ${
                 pathname === "/employees-list-test" ? "active" : ""
@@ -221,8 +208,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
               <ListItemIcon>
                 <InfoIcon />
               </ListItemIcon>
-              <ListItemText primary="Employees List Test" />
+              <ListItemText primary="All Employees List Test" />
             </ListItem>
+          
              <ListItem
               component={Link}
               href="/employee-salary-management-test"
@@ -393,7 +381,20 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
             <DescriptionIcon />
           </ListItemIcon>
           <ListItemText primary="Subject" />
-        </ListItem>  
+        </ListItem> 
+
+
+          <ListItem
+          component={Link}
+          href="/holiday"
+          sx={{ height: "40px" }}
+          className={`menu-link ${pathname === "/holiday" ? "active" : ""}`}
+        >
+          <ListItemIcon>
+            <DescriptionIcon />
+          </ListItemIcon>
+          <ListItemText primary="Holidays" />
+        </ListItem> 
 
         <ListItem
           component={Link}

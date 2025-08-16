@@ -39,8 +39,7 @@ const TeacherDetails: React.FC = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Teacher Details</Typography>
-      <BasicBreadcrumbs currentPage="Teacher Details" />
+      <BasicBreadcrumbs heading='Teacher Details' currentPage="Teacher Details" />
       <Paper sx={{ p: 4 }}>
         <Typography variant="h6" sx={{ paddingBottom: "20px" }}>About Me</Typography>
         <Box>
