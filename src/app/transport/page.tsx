@@ -9,6 +9,7 @@ import BasicBreadcrumbs from "@/component/BreadCrumb";
 import BasicInput from "@/component/custom-input";
 import CustomButton from "@/component/button";
 import DataTable from "@/component/Table";
+import { toast } from "react-toastify";
 
 const columns: GridColDef[] = [
   { field: "display_id", headerName: "ID", width: 70 },
@@ -76,10 +77,10 @@ const Transport = () => {
     if (isEditMode && editId !== null) {
       try {
         await axios.put(
-          `http://localhost:3002/transport_list/${editId}`,
+          `http://localhost:3001/transport_list/${editId}`,
           driver
         );
-        alert("Driver record updated successfully!");
+        toast.success("Driver record updated successfully!");
         setIsEditMode(false);
         setEditId(null);
         getAPI();
@@ -89,8 +90,8 @@ const Transport = () => {
       }
     } else {
       try {
-        await axios.post("http://localhost:3002/transport_list", driver);
-        alert("Driver record inserted successfully!");
+        await axios.post("http://localhost:3001/transport_list", driver);
+        toast.success("Driver record inserted successfully!");
         getAPI();
         resetForm();
       } catch (err) {
@@ -107,7 +108,8 @@ const Transport = () => {
 
   const remove = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:3002/transport_list/${id}`);
+      await axios.delete(`http://localhost:3001/transport_list/${id}`);
+      toast.success("Reocrd Remove Successfully.")
       getAPI();
     } catch (error) {
       console.error("Failed to delete student", error);
@@ -144,6 +146,7 @@ const Transport = () => {
                 name="rname"
                 value={driver.rname}
                 onChange={handleChange}
+                required
               />
             </Grid>
             <Grid size={4}>
@@ -153,6 +156,7 @@ const Transport = () => {
                 name="vname"
                 value={driver.vname}
                 onChange={handleChange}
+                required
               />
             </Grid>
             <Grid size={4}>
@@ -162,6 +166,7 @@ const Transport = () => {
                 name="dname"
                 value={driver.dname}
                 onChange={handleChange}
+                required
               />
             </Grid>
             <Grid size={4}>
@@ -171,6 +176,7 @@ const Transport = () => {
                 name="licens_no"
                 value={driver.licens_no}
                 onChange={handleChange}
+                required
               />
             </Grid>
             <Grid size={4}>
@@ -180,6 +186,7 @@ const Transport = () => {
                 name="phone_no"
                 value={driver.phone_no}
                 onChange={handleChange}
+                required
               />
             </Grid>
             <Grid size={12}>
@@ -215,7 +222,6 @@ const Transport = () => {
             columns={columns}
             rows={driverList}
             checkboxSelection
-            onView={(row) => router.push(`/studentDetails/${row.id}`)}
             onEdit={handleEdit}
             onDelete={(row) => remove(row.id)}
           />

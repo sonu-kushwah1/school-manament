@@ -10,6 +10,7 @@ import BasicInput from "@/component/custom-input";
 import BasicBreadcrumbs from "@/component/BreadCrumb";
 import CustomButton from "@/component/button";
 import DataTable from "@/component/Table";
+import { toast } from "react-toastify";
 
 const columns: GridColDef[] = [
   { field: "display_id", headerName: "ID", width: 70 },
@@ -142,7 +143,7 @@ const filterTableData = (filterName: string, filterValue: string) => {
           `http://localhost:3001/student_list/${editId}`,
           student
         );
-        alert("Fees record updated successfully!");
+        toast.success("Fees record Submited successfully!");
         setIsEditMode(false);
         setEditId(null);
         getAPI();
@@ -153,7 +154,7 @@ const filterTableData = (filterName: string, filterValue: string) => {
     } else {
       try {
         await axios.post("http://localhost:3001/student_list", student);
-        alert("Fees created successfully!");
+        toast.success("Fees created successfully!");
         getAPI();
         resetForm();
       } catch (err) {
@@ -171,6 +172,7 @@ const filterTableData = (filterName: string, filterValue: string) => {
   const remove = async (id: number) => {
     try {
       await axios.delete(`http://localhost:3001/student_list/${id}`);
+      toast.success("Fees");
       getAPI();
     } catch (error) {
       console.error("Failed to delete record", error);

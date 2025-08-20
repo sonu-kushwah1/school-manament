@@ -4,6 +4,7 @@ import { ThemeProvider, CssBaseline } from "@mui/material";
 import "./globals.css";
 import ThemeRegistry from "@/component/ThemeRegistry";
 import ReduxProvider from "./provider";
+import ToastProvider from "@/component/reactToster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,9 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ReduxProvider>
           <CssBaseline /> {/* Normalize styles */}
-          <ThemeRegistry>{children}</ThemeRegistry>
+          <ThemeRegistry>
+            <ToastProvider>{children}</ToastProvider>
+          </ThemeRegistry>
         </ReduxProvider>
       </body>
     </html>

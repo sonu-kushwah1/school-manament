@@ -9,6 +9,7 @@ import CustomButton from "@/component/button";
 import CustomTextarea from "@/component/TextArea";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
 
 const Dashboard: React.FC = () => {
   const router = useRouter();
@@ -50,10 +51,10 @@ const Dashboard: React.FC = () => {
     try {
       if (leaveId) {
         await axios.put(`http://localhost:3001/leave_list/${leaveId}`, leave);
-        alert("Leave updated!");
+        toast.success("Leave updated Successfully!");
       } else {
         await axios.post("http://localhost:3001/leave_list", leave);
-        alert("Leave added!");
+        toast.success("Leave added successfully!");
       }
       router.push("/leave");
     } catch (err) {

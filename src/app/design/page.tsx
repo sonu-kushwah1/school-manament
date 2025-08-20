@@ -2,46 +2,42 @@
 
 import React from "react";
 import LayoutWrapper from "@/component/Layout";
-import { Typography, Paper } from "@mui/material";
-import { GridColDef } from "@mui/x-data-grid";
+import { Typography, Paper, Button, Stack } from "@mui/material";
 import BasicBreadcrumbs from "@/component/BreadCrumb";
-import DataTable from "@/component/Table";
+import { toast } from "react-toastify";
 
 const Leave: React.FC = () => {
-  const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "empName", headerName: "Employees Name", width: 130 },
-    { field: "des", headerName: "Designation", width: 130 },
-    {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      width: 90,
-    },
-  
-  ];
-
-  const rows = [
-    { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-    { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-    { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-    { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-    { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-    { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-    { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-    { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-    { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  ];
+  const successToster = () => toast.success("✅ Success message!");
+  const errorToster = () => toast.error("❌ Error message!");
+  const warningToster = () => toast.warn("⚠️ Warning message!");
+  const infoToster = () => toast.info("ℹ️ Info message!");
+  const defaultToster = () => toast("📢 Default message!");
 
   return (
     <LayoutWrapper>
-      <Typography variant="h6">Leave List User</Typography>
-      <BasicBreadcrumbs currentPage="Leave" />
+      <BasicBreadcrumbs heading="Test Deafult Page" currentPage="Leave" />
       <Paper sx={{ p: 4 }}>
         <Typography variant="h5" sx={{ mb: 2 }}>
-          Leave List User
+          Test Deafult Page
         </Typography>
-        <DataTable columns={columns} rows={rows} />
+
+        <Stack spacing={2} direction="row">
+          <Button variant="contained" color="success" onClick={successToster}>
+            Success
+          </Button>
+          <Button variant="contained" color="error" onClick={errorToster}>
+            Error
+          </Button>
+          <Button variant="contained" color="warning" onClick={warningToster}>
+            Warning
+          </Button>
+          <Button variant="contained" color="info" onClick={infoToster}>
+            Info
+          </Button>
+          <Button variant="contained" onClick={defaultToster}>
+            Default
+          </Button>
+        </Stack>
       </Paper>
     </LayoutWrapper>
   );

@@ -61,7 +61,7 @@ const DataTable: React.FC<DataTableProps> = ({
             )}
             {onEdit && (
               <IconButton onClick={() => onEdit(params.row)} color="primary" size="small">
-                <EditIcon fontSize="small" />
+                <EditIcon fontSize="small" sx={{color:"#48a058"}} />
               </IconButton>
             )}
             {onDelete && (

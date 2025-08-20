@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// 🔹 Define Teacher type
+//  Define Teacher type
 export interface Teacher {
   id: number;
   fname: string;
@@ -17,7 +17,7 @@ export interface Teacher {
   subject:string;
 }
 
-// 🔹 Define State type
+//  Define State type
 interface TeacherState {
   data: Teacher[];
   singleTeacher: Teacher | null;

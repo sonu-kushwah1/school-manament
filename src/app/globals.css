@@ -256,10 +256,7 @@ ul{
 } 
 
 /*form css*/
-.selectTwo p,.textArea p{ 
-  padding-bottom: 8px;
-  color: #646464;
-}
+
 .textArea textarea{
   border: 1px solid #c4c4c4 ;
   border: none;
@@ -333,6 +330,14 @@ ul{
 .form-control:focus {
   border-color: #007bff;
   outline: none;
+}
+
+/*fileUpload*/
+.fileUpload{
+  border: 2px dashed lightgray;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 /*custom table css*/

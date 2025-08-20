@@ -1,4 +1,4 @@
-"use client";
+"use client"; 
 
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
@@ -7,9 +7,18 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import InputWithIcon from "@/component/inputWithIcon";
 import CustomButton from "@/component/button";
-import SimpleAlert from "@/component/alert";
+import SimpleAlert from "@/component/alert"; 
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+
+interface User {
+  email: string;
+  password: string;
+}
+
+const users: User[] = [
+  { email: "admin", password: "12345" },
+  { email: "admin@example.com", password: "adminpass" },
+];
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -24,38 +33,21 @@ function Login() {
 
   const router = useRouter();
 
-  const handleLogin = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+  const handleLogin = () => {
+    const matchedUser = users.find(
+      (user) => user.email === email && user.password === password
+    );
 
-      if (!res.ok) {
-        throw new Error("Invalid credentials");
-      }
-
-      const data = await res.json();
-
-      // ✅ Save token + user to localStorage
-      localStorage.setItem("token", data.accessToken);
-      localStorage.setItem("user", JSON.stringify(data.user));
-
+    if (matchedUser) {
       setAlertMessage("Login successful!");
-      toast.success("Login Successfully.");
+      setAlertSeverity("success");
 
       setTimeout(() => {
         router.push("/dashboard");
-      }, 1000);
-    } catch (err: any) {
-      setAlertMessage(err.message || "Login failed");
-      toast.error("Please Check User Name or Password.");
+      }); // Delay to show alert
+    } else {
+      setAlertMessage("Invalid credentials");
+      setAlertSeverity("error");
     }
   };
 
@@ -63,6 +55,7 @@ function Login() {
     <Box className="loginWrapper">
       <Typography variant="h4">Login</Typography>
 
+      {/* ✅ Conditional alert rendering */}
       {alertSeverity && (
         <Box my={2}>
           <SimpleAlert
@@ -80,7 +73,6 @@ function Login() {
         onChange={(e) => setEmail(e.target.value)}
         value={email}
       />
-
       <InputWithIcon
         icon={showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
         type={showPassword ? "text" : "password"}
@@ -89,7 +81,6 @@ function Login() {
         value={password}
         onIconClick={() => setShowPassword(!showPassword)}
       />
-
       <Box sx={{ textAlign: "center" }}>
         <CustomButton
           label="Login"

@@ -58,8 +58,7 @@ const Employees = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Employees List</Typography>
-      <BasicBreadcrumbs currentPage="Employees List" />
+      <BasicBreadcrumbs heading="Employees List" currentPage="Employees List" />
       <Box className="customBox">
         {error ? (
           <Typography color="error" sx={{ mt: 2 }}>

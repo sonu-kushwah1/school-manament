@@ -10,6 +10,7 @@ import BasicBreadcrumbs from "@/component/BreadCrumb";
 import BasicInput from "@/component/custom-input";
 import CustomButton from "@/component/button";
 import DataTable from "@/component/Table";
+import { toast } from "react-toastify";
 
 const columns: GridColDef[] = [
   { field: "display_id", headerName: "ID", width: 70 },
@@ -59,23 +60,48 @@ const FeesList = () => {
     setStudent((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Fetch list
-  const getAPI = async () => {
-    try {
-      const response = await axios.get("http://localhost:3001/fees_list");
 
-      // Original id preserve + display_id for table only
-      const updatedData = response.data.map((item: any, index: number) => ({
-        ...item,
-        display_id: index + 1, // Just for table display
-      }));
+// Fetch list
+const getAPI = async () => {
+  try {
+    const response = await axios.get("http://localhost:3001/fees_list");
 
-      setFeesList(updatedData);
-    } catch (error) {
-      setError("Error fetching Fees data");
-      console.error(error);
-    }
-  };
+    const order = [
+      "Nursery",
+      "L.K.G",
+      "U.K.G",
+      "1st",
+      "2nd",
+      "3rd",
+      "4th",
+      "5th",
+      "6th",
+      "7th",
+      "8th",
+      "9th",
+      "10th",
+      "11th",
+      "12th",
+    ];
+
+    // Sort records based on the above order
+    const sortedData = response.data.sort((a: any, b: any) => {
+      return order.indexOf(a.class) - order.indexOf(b.class);
+    });
+
+    // Preserve original id + add display_id
+    const updatedData = sortedData.map((item: any, index: number) => ({
+      ...item,
+      display_id: index + 1,
+    }));
+
+    setFeesList(updatedData);
+  } catch (error) {
+    setError("Error fetching Fees data");
+    console.error(error);
+  }
+};
+
 
   useEffect(() => {
     getAPI();
@@ -84,7 +110,7 @@ const FeesList = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!student.class || !student.fees) {
-      alert("Please fill all fields");
+      toast.warning("Please fill all fields");
       return;
     }
 
@@ -92,7 +118,7 @@ const FeesList = () => {
       // UPDATE existing record
       try {
         await axios.put(`http://localhost:3001/fees_list/${editId}`, student);
-        alert("Fees record updated successfully!");
+        toast.success("Fees record updated successfully!");
         setIsEditMode(false);
         setEditId(null);
         getAPI();
@@ -104,7 +130,7 @@ const FeesList = () => {
       // CREATE new record
       try {
         await axios.post("http://localhost:3001/fees_list", student);
-        alert("Fees created successfully!");
+        toast.success("Fees created successfully!");
         getAPI();
         resetForm();
       } catch (err) {
@@ -126,6 +152,7 @@ const FeesList = () => {
   const remove = async (id: number) => {
     try {
       await axios.delete(`http://localhost:3001/fees_list/${id}`);
+      toast.success("Class Remove Successfully.")
       getAPI();
     } catch (error) {
       console.error("Failed to delete student", error);

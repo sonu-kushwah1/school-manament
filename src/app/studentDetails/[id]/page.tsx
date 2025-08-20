@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useEffect, useRef, useState } from "react";
+import { useParams } from "next/navigation";
 import LayoutWrapper from "@/component/Layout";
 import { Typography, Grid, Box, Stack } from "@mui/material";
 import styled from "./styled.module.css";
@@ -13,19 +13,33 @@ import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import Image from "next/image";
 import IMAGES from "@/assets/images";
 import IconButton from "@mui/material/IconButton";
-import html2pdf from 'html2pdf.js';
+import html2pdf from "html2pdf.js";
 
 const StudentDetails: React.FC = () => {
-  
   const { id } = useParams();
   const [student, setStudent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const printRef = useRef<HTMLDivElement>(null);
 
   const buttonData = [
-    { icon: <DriveFileRenameOutlineIcon />, color: "secondary", label: "edit", action: () => alert("Edit Clicked") },
-    { icon: <LocalPrintshopIcon />, color: "success", label: "print", action: () => handlePrint() },
-    { icon: <FileDownloadIcon />, color: "success", label: "download", action: () => handleDownloadPDF() },
+    {
+      icon: <DriveFileRenameOutlineIcon />,
+      color: "secondary",
+      label: "edit",
+      action: () => alert("Edit Clicked"),
+    },
+    {
+      icon: <LocalPrintshopIcon />,
+      color: "success",
+      label: "print",
+      action: () => handlePrint(),
+    },
+    {
+      icon: <FileDownloadIcon />,
+      color: "success",
+      label: "download",
+      action: () => handleDownloadPDF(),
+    },
   ];
 
   useEffect(() => {
@@ -46,12 +60,12 @@ const StudentDetails: React.FC = () => {
   const handlePrint = () => {
     if (printRef.current) {
       const printContents = printRef.current.innerHTML;
-      const win = window.open('', '', 'width=900,height=650');
+      const win = window.open("", "", "width=900,height=650");
       if (win) {
-        win.document.write('<html><head><title>Print Student Record</title>');
-        win.document.write('</head><body>');
+        win.document.write("<html><head><title>Print Student Record</title>");
+        win.document.write("</head><body>");
         win.document.write(printContents);
-        win.document.write('</body></html>');
+        win.document.write("</body></html>");
         win.document.close();
         win.focus();
         setTimeout(() => {
@@ -64,7 +78,7 @@ const StudentDetails: React.FC = () => {
 
   const handleDownloadPDF = () => {
     if (printRef.current) {
-      html2pdf().from(printRef.current).save('student-record.pdf');
+      html2pdf().from(printRef.current).save("student-record.pdf");
     }
   };
 
@@ -73,16 +87,31 @@ const StudentDetails: React.FC = () => {
 
   return (
     <LayoutWrapper>
-      <BasicBreadcrumbs heading='Student Details' currentPage="Student Details" />
+      <BasicBreadcrumbs
+        heading="Student Details"
+        currentPage="Student Details"
+      />
       <Paper sx={{ p: 4 }}>
-        <Typography variant="h6" sx={{ paddingBottom: "20px" }}>About Me</Typography>
+        <Typography variant="h6" sx={{ paddingBottom: "20px" }}>
+          About Me
+        </Typography>
         <Box ref={printRef}>
           <Grid container spacing={2}>
             <Grid size={4}>
-              <Image
-                src={IMAGES.StudentImages}
-                alt="studentProfile"
-                className="img-fluid"
+               <Image
+                src={
+                  student.image && student.image.trim() !== ""
+                    ? student.image
+                    : IMAGES.StudentImages
+                }
+                alt="Student"
+                style={{
+                  width: "270px",
+                  height: "270px",
+                  borderRadius: "10px",
+                  marginTop: "10px",
+                  objectFit: "cover",
+                }}
               />
             </Grid>
             <Grid size={8}>
@@ -119,16 +148,44 @@ const StudentDetails: React.FC = () => {
 
               <table className="normalTable" style={{ marginTop: "25px" }}>
                 <tbody>
-                  <tr><td>Name:</td><td className="contentData">{student.fname}</td></tr>
-                  <tr><td>Gender:</td><td className="contentData">{student.gender}</td></tr>
-                  <tr><td>Date Of Birth:</td><td className="contentData">{student.dob}</td></tr>
-                  <tr><td>Religion:</td><td className="contentData">{student.religion}</td></tr>
-                  <tr><td>E-mail:</td><td className="contentData">{student.email}</td></tr>
-                  <tr><td>Class:</td><td className="contentData">{student.class}</td></tr>
-                  <tr><td>Section:</td><td className="contentData">{student.section}</td></tr>
-                  <tr><td>Roll:</td><td className="contentData">{student.roll_no}</td></tr>
-                  <tr><td>Address:</td><td className="contentData">{student.address}</td></tr>
-                  <tr><td>Phone:</td><td className="contentData">{student.phone}</td></tr>
+                  <tr>
+                    <td>Name:</td>
+                    <td className="contentData">
+                      {student.fname} {student.lname}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Gender:</td>
+                    <td className="contentData">{student.gender}</td>
+                  </tr>
+                  <tr>
+                    <td>Date Of Birth:</td>
+                    <td className="contentData">{student.dob}</td>
+                  </tr>
+                  <tr>
+                    <td>Religion:</td>
+                    <td className="contentData">{student.religion}</td>
+                  </tr>
+                  <tr>
+                    <td>E-mail:</td>
+                    <td className="contentData">{student.email}</td>
+                  </tr>
+                  <tr>
+                    <td>Class:</td>
+                    <td className="contentData">{student.class}</td>
+                  </tr>
+                  <tr>
+                    <td>Roll:</td>
+                    <td className="contentData">{student.roll_no}</td>
+                  </tr>
+                  <tr>
+                    <td>Address:</td>
+                    <td className="contentData">{student.address}</td>
+                  </tr>
+                  <tr>
+                    <td>Phone:</td>
+                    <td className="contentData">{student.phone}</td>
+                  </tr>
                 </tbody>
               </table>
             </Grid>

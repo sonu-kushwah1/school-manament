@@ -5,12 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import BasicInput from "@/component/custom-input";
 import SelectInput from "@/component/selectTwo";
 import CustomTextarea from "@/component/TextArea";
-import {
-  Box,
-  Button,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import LayoutWrapper from "@/component/Layout";
 import BasicBreadcrumbs from "@/component/BreadCrumb";
 
@@ -34,6 +29,7 @@ const UpdateEmployee = () => {
     lname: "",
     gender: "",
     dob: "",
+    joining: "",
     emp_id: "",
     email: "",
     phone: "",
@@ -59,14 +55,19 @@ const UpdateEmployee = () => {
           lname: data.lname || "",
           gender: data.gender || "",
           dob: data.dob || "",
+          joining: data.joining || "",
           emp_id: data.emp_id || "",
           email: data.email || "",
           phone: data.phone || "",
           des: data.des || "",
           address: data.address || "",
         });
-        setGrossSalary(data.gross_salary?.toString() || "");
-        setPfPercent(data.pf_percent?.toString() || "");
+        setGrossSalary(
+          data.gross_salary !== undefined ? String(data.gross_salary) : ""
+        );
+        setPfPercent(
+          data.pf_percent !== undefined ? String(data.pf_percent) : ""
+        );
       } catch (err) {
         console.error("Error fetching data", err);
         setError("Failed to fetch employee details.");
@@ -95,17 +96,18 @@ const UpdateEmployee = () => {
       await axios.put(`http://localhost:3001/emp_list_test/${id}`, updatedData);
       router.push("/employees-list-test"); // redirect to list page
       console.log("emp data", updatedData);
+      alert("Employees Update Successfuly..");
     } catch (err) {
       console.error("Update failed", err);
       setError("Failed to update employee.");
     }
   };
 
- const handleChange = (
-  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-) => {
-  setemployee({ ...employee, [e.target.name]: e.target.value });
-};
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setemployee({ ...employee, [e.target.name]: e.target.value });
+  };
   const handleSelectChange = (name: keyof typeof employee, value: string) => {
     setemployee((prev) => ({ ...prev, [name]: value }));
   };
@@ -126,8 +128,10 @@ const UpdateEmployee = () => {
 
   return (
     <LayoutWrapper>
-  
-      <BasicBreadcrumbs heading=" Update Employee" currentPage="Update Employee" />
+      <BasicBreadcrumbs
+        heading=" Update Employee"
+        currentPage="Update Employee"
+      />
       {error && (
         <Typography color="error" sx={{ mb: 2 }}>
           {error}
@@ -168,6 +172,15 @@ const UpdateEmployee = () => {
                 inputType="date"
                 name="dob"
                 value={employee.dob}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid size={4}>
+              <BasicInput
+                label="Joining Date"
+                inputType="date"
+                name="joining"
+                value={employee.joining}
                 onChange={handleChange}
               />
             </Grid>
@@ -214,6 +227,7 @@ const UpdateEmployee = () => {
                 name="gross_salary"
                 value={grossSalary}
                 onChange={(e) => setGrossSalary(e.target.value)}
+                disabled
               />
             </Grid>
             <Grid size={4}>
@@ -223,6 +237,7 @@ const UpdateEmployee = () => {
                 inputType="number"
                 value={pfPercent}
                 onChange={(e) => setPfPercent(e.target.value)}
+                disabled
               />
             </Grid>
             <Grid size={12}>

@@ -15,6 +15,7 @@ import {
   updateTeacher,
 } from "@/redux/slice/techerSlice";
 import { AppDispatch, RootState } from "@/store";
+import { toast } from "react-toastify";
 
 const AddTeacher: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -91,7 +92,7 @@ const AddTeacher: React.FC = () => {
       !degree ||
       !subject
     ) {
-      alert("Please fill all fields");
+      toast.warning("Please fill all fields");
       return;
     }
 
@@ -119,6 +120,7 @@ const AddTeacher: React.FC = () => {
           phone: Number(phone),
         })
       );
+      toast.success("Record Insert Successfully.")
     }
 
     // Optionally reset after submission
@@ -180,8 +182,7 @@ const AddTeacher: React.FC = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Add New Teacher</Typography>
-      <BasicBreadcrumbs currentPage="Add New Teacher" />
+      <BasicBreadcrumbs heading="Add New Teacher" currentPage="Add New Teacher" />
       <Paper
         className="innerWrapper"
         style={{ padding: "1.5rem", marginTop: "1rem" }}
@@ -190,20 +191,22 @@ const AddTeacher: React.FC = () => {
           <Grid container spacing={2}>
             <Grid size={3}>
               <BasicInput
-                label="First Name*"
+                label="First Name"
                 inputType="text"
                 name="fname"
                 value={formData.fname}
                 onChange={handleChange}
+                required
               />
             </Grid>
             <Grid size={3}>
               <BasicInput
-                label="Last Name*"
+                label="Last Name"
                 inputType="text"
                 name="lname"
                 value={formData.lname}
                 onChange={handleChange}
+                required
               />
             </Grid>
             <Grid size={3}>
@@ -212,6 +215,7 @@ const AddTeacher: React.FC = () => {
                 value={formData.gender}
                 onChange={(val) => handleSelectChange("gender", val)}
                 options={genderOptions}
+                required
               />
             </Grid>
             <Grid size={3}>
@@ -221,6 +225,7 @@ const AddTeacher: React.FC = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                required
               />
             </Grid>
             <Grid size={3}>
@@ -230,15 +235,17 @@ const AddTeacher: React.FC = () => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
+                required
               />
             </Grid>
             <Grid size={3}>
               <BasicInput
-                label="Date Of Birth*"
+                label="Date Of Birth"
                 inputType="date"
                 name="dob"
                 value={formData.dob}
                 onChange={handleChange}
+                required
               />
             </Grid>
             <Grid size={3}>
@@ -247,6 +254,7 @@ const AddTeacher: React.FC = () => {
                 value={formData.city}
                 onChange={(val) => handleSelectChange("city", val)}
                 options={cityOptions}
+                required
               />
             </Grid>
             <Grid size={3}>
@@ -255,6 +263,7 @@ const AddTeacher: React.FC = () => {
                 value={formData.univercity}
                 onChange={(val) => handleSelectChange("univercity", val)}
                 options={univercityOptions}
+                required
               />
             </Grid>
             <Grid size={3}>
@@ -263,6 +272,7 @@ const AddTeacher: React.FC = () => {
                 value={formData.degree}
                 onChange={(val) => handleSelectChange("degree", val)}
                 options={degreeOptions}
+                required
               />
             </Grid>
             <Grid size={3}>
@@ -271,6 +281,7 @@ const AddTeacher: React.FC = () => {
                 value={formData.subject}
                 onChange={(val) => handleSelectChange("subject", val)}
                 options={subjectOptions}
+                required
               />
             </Grid>
             <Grid size={12}>

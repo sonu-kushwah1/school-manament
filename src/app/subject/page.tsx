@@ -10,6 +10,7 @@ import BasicBreadcrumbs from "@/component/BreadCrumb";
 import BasicInput from "@/component/custom-input";
 import CustomButton from "@/component/button";
 import DataTable from "@/component/Table";
+import { toast } from "react-toastify";
 
 const columns: GridColDef[] = [
   { field: "display_id", headerName: "ID", width: 70 },
@@ -60,7 +61,7 @@ const Subject = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!student.subject) {
-      alert("Please fill all fields");
+      toast.warning("Please fill all fields");
       return;
     }
 
@@ -71,7 +72,7 @@ const Subject = () => {
           `http://localhost:3001/subject_list/${editId}`,
           student
         );
-        alert("Subject record updated successfully!");
+        toast.success("Subject updated successfully!");
         setIsEditMode(false);
         setEditId(null);
         getAPI();
@@ -83,7 +84,7 @@ const Subject = () => {
       // CREATE new record
       try {
         await axios.post("http://localhost:3001/subject_list", student);
-        alert("Subject created successfully!");
+        toast.success("Subject created successfully!");
         getAPI();
         resetForm();
       } catch (err) {
@@ -104,6 +105,7 @@ const Subject = () => {
   const remove = async (id: number) => {
     try {
       await axios.delete(`http://localhost:3001/subject_list/${id}`);
+      toast.success("Subject Remove Successfully.")
       getAPI();
     } catch (error) {
       console.error("Failed to delete student", error);

@@ -1,13 +1,15 @@
 import React from "react";
-import styled from "./styled.module.css";
+import { Box, Typography } from "@mui/material";
 
 interface InputData {
   label?: string;
   inputType: string;
   placeholder?: string;
   name: string;
-  value: string | number; // ✅ string और number दोनों allow
+  value?: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
+  required?: boolean;
 }
 
 export default function BasicInput({
@@ -16,29 +18,47 @@ export default function BasicInput({
   placeholder,
   name,
   value,
-  onChange
+  onChange,
+  disabled = false,
+  required = false,
 }: InputData) {
   return (
-    <div className={styled.basicInput}>
+    <div>
       {label && (
-        <label htmlFor={name} style={{ display: "block" }}>
+        <Typography
+          component="label"
+          htmlFor={name}
+          sx={{ display: "block", fontWeight: 500,paddingBottom:"2px" }}
+        >
           {label}
-        </label>
+          {required && <span style={{ color: "red" }}> *</span>}
+        </Typography>
       )}
-      <input
+
+      <Box
+        component="input"
         type={inputType}
         id={name}
-        autoComplete="off"
         name={name}
+        autoComplete="off"
         onChange={onChange}
-        value={value}
+        {...(inputType !== "file" ? { value } : {})}
         placeholder={placeholder}
-        style={{
+        disabled={disabled}
+        required={required}
+        sx={{
           width: "100%",
           border: "1px solid #c4c4c4",
-          padding: "15px 15px",
+          p: "15px",
           outline: "none",
-          transition: "border-width 0.3s ease",
+          transition: "border-color 0.3s ease",
+          bgcolor: disabled ? "#f5f5f5" : "white",
+          cursor: disabled ? "not-allowed" : "text",
+
+          // ✅ focus effect
+          "&:focus": {
+            borderColor: "#1c1b54",
+          },
         }}
       />
     </div>

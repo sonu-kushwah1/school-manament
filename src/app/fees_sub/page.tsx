@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Grid, Box, Container,Typography, Button } from "@mui/material";
+import { Grid, Box, Container, Typography, Button } from "@mui/material";
 import axios from "axios";
 import SelectInput from "@/component/selectTwo";
 import BasicInput from "@/component/custom-input";
 import LayoutWrapper from "@/component/Layout";
 import BasicBreadcrumbs from "@/component/BreadCrumb";
+import { toast } from "react-toastify";
 
 interface Student {
   id: number;
@@ -104,11 +105,11 @@ const FeesSub: React.FC = () => {
   // Handle submit fees update
   const handleSubmitFees = async () => {
     if (!selectedStudent) {
-      alert("Please select a student.");
+      toast.warning("Please select a student.");
       return;
     }
     if (submitAmount <= 0) {
-      alert("Please enter a valid amount.");
+      toast.warning("Please enter a valid amount.");
       return;
     }
 
@@ -137,6 +138,7 @@ const FeesSub: React.FC = () => {
       );
 
       setSubmitAmount(0); // Reset input
+      toast.success("Fees Submit Successfully.");
     } catch (err) {
       console.error("Error updating fees:", err);
     }
@@ -144,8 +146,10 @@ const FeesSub: React.FC = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Add Fees Submission</Typography>
-      <BasicBreadcrumbs currentPage="Add Fees Submission" />
+      <BasicBreadcrumbs
+        heading="Add Fees Submission"
+        currentPage="Add Fees Submission"
+      />
       <Box className="customBox" mb={3}>
         <form>
           <Grid container spacing={2}>
@@ -188,48 +192,48 @@ const FeesSub: React.FC = () => {
             </Grid>
           </Grid>
         </form>
-      </Box>
 
-      <div className="custom-table-container attendance">
-        <table className="custom-table">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Student Name</th>
-              <th>Class</th>
-              <th>Total Fees</th>
-              <th>Submit Fees</th>
-              <th>Due Fees</th>
-            </tr>
-          </thead>
-          <tbody>
-            {loading ? (
+        <div className="custom-table-container attendance" style={{marginTop:"15px"}}>
+          <table className="custom-table">
+            <thead>
               <tr>
-                <td colSpan={6} style={{ textAlign: "center" }}>
-                  Loading...
-                </td>
+                <th>Id</th>
+                <th>Student Name</th>
+                <th>Class</th>
+                <th>Total Fees</th>
+                <th>Submit Fees</th>
+                <th>Due Fees</th>
               </tr>
-            ) : filteredStudents.length > 0 ? (
-              filteredStudents.map((student, index) => (
-                <tr key={student.id}>
-                  <td>{index + 1}</td>
-                  <td>{student.fname}</td>
-                  <td>{student.class}</td>
-                  <td>{student.fees}</td>
-                  <td>{student.submitFees}</td>
-                  <td>{student.dueFees}</td>
+            </thead>
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td colSpan={6} style={{ textAlign: "center" }}>
+                    Loading...
+                  </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={6} style={{ textAlign: "center" }}>
-                  No records found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+              ) : filteredStudents.length > 0 ? (
+                filteredStudents.map((student, index) => (
+                  <tr key={student.id}>
+                    <td>{index + 1}</td>
+                    <td>{student.fname}</td>
+                    <td>{student.class}</td>
+                    <td>{student.fees}</td>
+                    <td>{student.submitFees}</td>
+                    <td>{student.dueFees}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={6} style={{ textAlign: "center" }}>
+                    No records found
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </Box>
     </LayoutWrapper>
   );
 };

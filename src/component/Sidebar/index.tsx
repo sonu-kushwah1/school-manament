@@ -16,13 +16,14 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import PersonIcon from "@mui/icons-material/Person";
-
+import SettingsAccessibilityIcon from '@mui/icons-material/SettingsAccessibility';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import InfoIcon from "@mui/icons-material/Info";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Employees from "@/app/employees/page";
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -85,9 +86,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
               sx={{ height: "36px" }}
             >
               <ListItemIcon>
-                <InfoIcon />
+                 <PermIdentityIcon />
               </ListItemIcon>
-              <ListItemText primary="Student" />
+              <ListItemText primary="All Student List" />
             </ListItem>
             <ListItem
               component={Link}
@@ -98,11 +99,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
               sx={{ height: "36px" }}
             >
               <ListItemIcon>
-                <PeopleAltIcon />
+                <PermIdentityIcon />
               </ListItemIcon>
               <ListItemText primary="Add New Student" />
             </ListItem>
-            <ListItem
+            {/* <ListItem
               component={Link}
               href="/studentDetails"
               className={`menu-link ${
@@ -111,10 +112,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
               sx={{ height: "36px" }}
             >
               <ListItemIcon>
-                <PeopleAltIcon />
+                <PermIdentityIcon />
               </ListItemIcon>
               <ListItemText primary="Student Details" />
-            </ListItem>
+            </ListItem> */}
           </List>
         </Collapse>
 
@@ -144,9 +145,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
               sx={{ height: "36px" }}
             >
               <ListItemIcon>
-                <InfoIcon />
+                  <PermIdentityIcon />
               </ListItemIcon>
-              <ListItemText primary="Teacher" />
+              <ListItemText primary="All Teacher List" />
             </ListItem>
             <ListItem
               component={Link}
@@ -157,11 +158,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
               sx={{ height: "36px" }}
             >
               <ListItemIcon>
-                <PeopleAltIcon />
+                <PermIdentityIcon />
               </ListItemIcon>
               <ListItemText primary="Add New Teacher" />
             </ListItem>
-            <ListItem
+            {/* <ListItem
               component={Link}
               href="/teacher-details"
               className={`menu-link ${
@@ -173,7 +174,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
                 <PeopleAltIcon />
               </ListItemIcon>
               <ListItemText primary="Teacher Details" />
-            </ListItem>
+            </ListItem> */}
           </List>
         </Collapse>
 
@@ -184,9 +185,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
           onClick={() => toggleMenu("employees")}
         >
           <ListItemIcon>
-            <PeopleAltIcon />
+             <PeopleAltIcon />
           </ListItemIcon>
-          <ListItemText primary="Employees" />
+          <ListItemText primary=" Employees" />
           {openMenus.employees ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
 
@@ -206,7 +207,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
               sx={{ height: "36px" }}
             >
               <ListItemIcon>
-                <InfoIcon />
+               <PermIdentityIcon />
               </ListItemIcon>
               <ListItemText primary="All Employees List Test" />
             </ListItem>
@@ -220,9 +221,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
               sx={{ height: "36px" }}
             >
               <ListItemIcon>
-                <InfoIcon />
+                <PermIdentityIcon />
               </ListItemIcon>
-              <ListItemText primary="Emp Salary Management Test" />
+              <ListItemText primary="Emp Salary Management" />
             </ListItem>
 
             <ListItem
@@ -234,7 +235,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
               sx={{ height: "36px" }}
             >
               <ListItemIcon>
-                <PeopleAltIcon />
+                <PermIdentityIcon />
               </ListItemIcon>
               <ListItemText primary="Add Employees Test" />
             </ListItem>
@@ -247,7 +248,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
           onClick={() => toggleMenu("fees")}
         >
           <ListItemIcon>
-            <MonetizationOnIcon />
+            <CurrencyRupeeIcon />
           </ListItemIcon>
           <ListItemText primary="Fees" />
           {openMenus.fees ? <ExpandLess /> : <ExpandMore />}
@@ -293,7 +294,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
           onClick={() => toggleMenu("hrms")}
         >
           <ListItemIcon>
-            <MonetizationOnIcon />
+            <SettingsAccessibilityIcon />
           </ListItemIcon>
           <ListItemText primary="HRMS" />
           {openMenus.hrms ? <ExpandLess /> : <ExpandMore />}
@@ -315,7 +316,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
               <ListItemIcon>
                 <InfoIcon />
               </ListItemIcon>
-              <ListItemText primary="Leave" />
+              <ListItemText primary="All Leave List" />
             </ListItem>
             <ListItem
               component={Link}
@@ -381,6 +382,18 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
             <DescriptionIcon />
           </ListItemIcon>
           <ListItemText primary="Subject" />
+        </ListItem> 
+
+         <ListItem
+          component={Link}
+          href="/designation"
+          sx={{ height: "40px" }}
+          className={`menu-link ${pathname === "/designation" ? "active" : ""}`}
+        >
+          <ListItemIcon>
+            <DescriptionIcon />
+          </ListItemIcon>
+          <ListItemText primary="Designation" />
         </ListItem> 
 
 

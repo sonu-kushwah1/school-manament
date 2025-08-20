@@ -8,6 +8,7 @@ import SelectInput from "@/component/selectTwo";
 import CustomButton from "@/component/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 interface Employee {
   id?: number;
@@ -138,7 +139,7 @@ const Employees = () => {
           `http://localhost:3001/emp_list_test/${editId}`,
           updatedEmployee
         );
-        alert("Salary updated!");
+        toast.success("Salary updated Successfully!");
       } else {
         const { display_id, ...newEmployee } = {
           ...employee,
@@ -167,11 +168,7 @@ const Employees = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5" mb={1}>
-        Employees Salary Management Test
-      </Typography>
-      <BasicBreadcrumbs currentPage="Employees Salary Management" />
-
+      <BasicBreadcrumbs heading="Employees Salary Management Test" currentPage="Employees Salary Management" />
       <Box className="customBox" sx={{ mt: 2 }}>
         {error && (
           <Typography color="error" mb={2}>
@@ -201,6 +198,7 @@ const Employees = () => {
                 name="emp_id"
                 value={employee.emp_id}
                 onChange={handleChange}
+                disabled
               />
             </Grid>
 
@@ -212,6 +210,7 @@ const Employees = () => {
                 name="fname"
                 value={employee.fname}
                 onChange={handleChange}
+                disabled
               />
             </Grid>
 

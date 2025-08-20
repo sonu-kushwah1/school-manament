@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import LayoutWrapper from "@/component/Layout";
-import { Typography, Grid, Paper, Stack } from "@mui/material";
+import { Typography, Grid, Paper, Stack, Box } from "@mui/material";
 import BasicBreadcrumbs from "@/component/BreadCrumb";
 import BasicInput from "@/component/custom-input";
 import SelectInput from "@/component/selectTwo";
@@ -9,13 +9,14 @@ import CustomButton from "@/component/button";
 import CustomTextarea from "@/component/TextArea";
 import axios from "axios";
 import { useRouter, useParams } from "next/navigation";
+import { toast } from "react-toastify";
 
 const Dashboard: React.FC = () => {
   const router = useRouter();
   const params = useParams();
   const id = params?.id;
 
-  const [feesList, setFeesList] = useState<any[]>([]); // fees_list from API
+
   const [student, setStudent] = useState({
     fname: "",
     lname: "",
@@ -56,12 +57,50 @@ const Dashboard: React.FC = () => {
   };
 
   // ⬇ Fetch class-fees list
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/fees_list")
-      .then((res) => setFeesList(res.data))
-      .catch((err) => console.error("Error fetching fees list:", err));
-  }, []);
+const [feesList, setFeesList] = useState<any[]>([]);
+const [classOptions, setClassOptions] = useState<{ label: string; value: string }[]>([]);
+
+// Fetch fees_list from API
+useEffect(() => {
+  axios
+    .get("http://localhost:3001/fees_list")
+    .then((res) => {
+      const order = [
+        "Nursery",
+        "L.K.G",
+        "U.K.G",
+        "1st",
+        "2nd",
+        "3rd",
+        "4th",
+        "5th",
+        "6th",
+        "7th",
+        "8th",
+        "9th",
+        "10th",
+        "11th",
+        "12th",
+      ];
+
+      // sort API data by class
+      const sortedData = res.data.sort(
+        (a: any, b: any) => order.indexOf(a.class) - order.indexOf(b.class)
+      );
+
+      setFeesList(sortedData);
+
+      // also set sorted classOptions
+      setClassOptions(
+        sortedData.map((item: any) => ({
+          label: item.class,
+          value: item.class,
+        }))
+      );
+    })
+    .catch((err) => console.error("Error fetching fees list:", err));
+}, []);
+
 
   // ⬇ Fetch existing student if in edit mode
   useEffect(() => {
@@ -78,10 +117,11 @@ const Dashboard: React.FC = () => {
     try {
       if (id) {
         await axios.put(`http://localhost:3001/student_list/${id}`, student);
-        alert("Student updated!");
+        // alert("update Student ");
+        toast.success("Student updated!");
       } else {
         await axios.post("http://localhost:3001/student_list", student);
-        alert("Student added!");
+        toast.success("Student added!");
       }
       router.push("/student");
     } catch (err) {
@@ -106,11 +146,7 @@ const Dashboard: React.FC = () => {
     { label: "Christian", value: "Christian" },
   ];
 
-  // Class options from feesList
-  const classOptions = feesList.map((item) => ({
-    label: item.class,
-    value: item.class,
-  }));
+  
 
   return (
     <LayoutWrapper>
@@ -211,6 +247,7 @@ const Dashboard: React.FC = () => {
                 name="fees"
                 value={student.fees}
                 onChange={handleChange}
+                disabled
               />
             </Grid>
             <Grid size={3}>
@@ -234,36 +271,42 @@ const Dashboard: React.FC = () => {
 
             <Grid size={12}>
               <label>Upload Image</label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) {
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                      setStudent((prev) => ({
-                        ...prev,
-                        image: reader.result as string,
-                      }));
-                    };
-                    reader.readAsDataURL(file);
-                  }
-                }}
-              />
-              {student.image && (
-                <img
-                  src={student.image}
-                  alt="Student"
-                  style={{
-                    width: "80px",
-                    height: "80px",
-                    borderRadius: "50%",
-                    marginTop: "10px",
-                    objectFit: "cover",
+              <Box className="fileUpload">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        setStudent((prev) => ({
+                          ...prev,
+                          image: reader.result as string,
+                        }));
+                      };
+                      reader.readAsDataURL(file);
+                    }
                   }}
                 />
-              )}
+               
+              </Box>
+              <label>Preview Profile</label>
+              <Box>
+                   {student.image && (
+                  <img
+                    src={student.image}
+                    alt="Student"
+                    style={{
+                      width: "80px",
+                      height: "80px",
+                      borderRadius: "50%",
+                      marginTop: "10px",
+                      objectFit: "cover",
+                    }}
+                  />
+                )}
+              </Box>
             </Grid>
 
             <Grid size={12}>

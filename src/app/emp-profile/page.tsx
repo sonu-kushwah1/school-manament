@@ -31,6 +31,7 @@ import SimpleDialog from "@/component/modal";
 import BasicInput from "@/component/custom-input";
 import CustomButton from "@/component/button";
 import BankDetails from "./bank-details";
+import PaySlip from "./payslip";
 
 // Info item reusable component
 type InfoItemProps = {
@@ -101,10 +102,7 @@ const Employees: React.FC = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Employees Profile</Typography>
-      <BasicBreadcrumbs currentPage="Employees Profile" />
-   
-
+      <BasicBreadcrumbs heading="Employees Profile" currentPage="Employees Profile" />
       <Box className="customBox">
         <Grid container spacing={2}>
           {/* Left Column */}
@@ -264,48 +262,7 @@ const Employees: React.FC = () => {
                 </Paper>
               </CustomTabPanel>
               <CustomTabPanel value={value} index={2}>
-                <Paper
-                  sx={{
-                    padding: "15px",
-                    borderRadius: "15px",
-                    marginBottom: "30px",
-                  }}
-                >
-                  <Stack direction="row" justifyContent="space-between">
-                    <Stack direction="row" alignItems="center" gap={1}>
-                      <AccountCircleIcon />
-                      <Typography variant="h6">Payslips Information</Typography>
-                    </Stack>
-                    <IconButton aria-label="fingerprint" color="success">
-                      <EditIcon />
-                    </IconButton>
-                  </Stack>
-                  <Box>
-                    {/* Information rows */}
-                    <Stack spacing={1.5}>
-                      {paySlipData.map((item, index) => (
-                        <React.Fragment key={index}>
-                          <Grid container>
-                            <Grid size={6}>
-                              <Typography
-                                variant="body2"
-                                color="text.secondary"
-                              >
-                                {item.label}
-                              </Typography>
-                            </Grid>
-                            <Grid size={6}>
-                              <Typography variant="body2" color="text.primary">
-                                {item.value}
-                              </Typography>
-                            </Grid>
-                          </Grid>
-                          {index !== paySlipData.length - 1 && <Divider />}
-                        </React.Fragment>
-                      ))}
-                    </Stack>
-                  </Box>
-                </Paper>
+               <PaySlip/>
               </CustomTabPanel>
             </Box>
           </Grid>

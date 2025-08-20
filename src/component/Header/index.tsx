@@ -19,7 +19,7 @@ type HeaderProps = {
 };
 
 const settings = [
-  { label: 'Profile', path: '/profile' },
+  { label: 'Profile', path: '/emp-profile' },
   { label: 'Dashboard', path: '/dashboard' },
   { label: 'Logout', path: '/' },
 ];
@@ -61,7 +61,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
               textDecoration: 'none',
             }}
           >
-            Json Data
+            Payroll & HR
           </Typography>
 
           {/* Mobile Menu Button */}

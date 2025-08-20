@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchTeachers, deleteTeacher } from "@/redux/slice/techerSlice";
 import type { RootState, AppDispatch } from "@/store";
 import { useRouter } from "next/navigation";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { GridColDef } from "@mui/x-data-grid";
 import BasicBreadcrumbs from "@/component/BreadCrumb";
 import LayoutWrapper from "@/component/Layout";
 import DataTable from "@/component/Table";
+import { toast } from "react-toastify";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "Id", width: 70 },
@@ -36,29 +37,32 @@ function Teacher() {
 
   const handleDelete = (id: number) => {
     dispatch(deleteTeacher(id)).then(() => {
+      toast.success("Remove Teacher Successfully.");
       dispatch(fetchTeachers()); // refetch after delete
     });
   };
 
   return (
     <LayoutWrapper>
-      <BasicBreadcrumbs heading="Teacher List"  currentPage="Teacher List" />
-      {loading ? (
-        <Typography sx={{ mt: 2 }}>Loading...</Typography>
-      ) : error ? (
-        <Typography color="error" sx={{ mt: 2 }}>
-          Error: {error}
-        </Typography>
-      ) : (
-        <DataTable
-          columns={columns}
-          rows={users}
-          checkboxSelection
-          onView={(row) => router.push(`/teacher-details/${row.id}`)}
-          onEdit={(row) => router.push(`/add-teacher/${row.id}`)}
-          onDelete={(row) => handleDelete(row.id)}
-        />
-      )}
+      <BasicBreadcrumbs heading="Teacher List" currentPage="Teacher List" />
+      <Box className="customBox">
+        {loading ? (
+          <Typography sx={{ mt: 2 }}>Loading...</Typography>
+        ) : error ? (
+          <Typography color="error" sx={{ mt: 2 }}>
+            Error: {error}
+          </Typography>
+        ) : (
+          <DataTable
+            columns={columns}
+            rows={users}
+            checkboxSelection
+            onView={(row) => router.push(`/teacher-details/${row.id}`)}
+            onEdit={(row) => router.push(`/add-teacher/${row.id}`)}
+            onDelete={(row) => handleDelete(row.id)}
+          />
+        )}
+      </Box>
     </LayoutWrapper>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import LayoutWrapper from "@/component/Layout";
 import { Box, Typography, Grid, Paper, Stack } from "@mui/material";
 import BasicBreadcrumbs from "@/component/BreadCrumb";
@@ -9,6 +9,7 @@ import CustomButton from "@/component/button";
 import CustomTextarea from "@/component/TextArea";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const Employees = () => {
   const router = useRouter();
@@ -18,16 +19,41 @@ const Employees = () => {
     lname: "",
     gender: "",
     dob: "",
+    joining: "",
     emp_id: "",
     email: "",
     phone: "",
     des: "",
     address: "",
   });
-  const [grossSalary, setGrossSalary] = useState(""); // user-entered gross
-  const [pfPercent, setPfPercent] = useState(""); // PF percentage
+
+  const [grossSalary, setGrossSalary] = useState("");
+  const [pfPercent, setPfPercent] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
+  // designation state
+  const [designationOptions, setDesignationOptions] = useState<
+    { label: string; value: string }[]
+  >([]);
+
+  // fetch designation list
+  useEffect(() => {
+    const fetchDesignations = async () => {
+      try {
+        const res = await axios.get("http://localhost:3001/des_list");
+        const opts = res.data.map((item: any) => ({
+          label: item.name || item.des || item.title, // 👈 adjust based on API response
+          value: item.name || item.des || item.title,
+        }));
+        setDesignationOptions(opts);
+      } catch (err) {
+        console.error("Error fetching designations:", err);
+      }
+    };
+    fetchDesignations();
+  }, []);
+
+  // input handlers
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -47,6 +73,7 @@ const Employees = () => {
     setPfPercent(e.target.value);
   };
 
+  // computed values
   const numericGross = useMemo(() => {
     const n = parseFloat(grossSalary);
     return isNaN(n) || n < 0 ? 0 : n;
@@ -67,42 +94,37 @@ const Employees = () => {
     pfAmount,
   ]);
 
+  // submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Basic required validation example
-    if (!student.fname.trim() || !student.lname.trim()) {
-      alert("First and last name are required.");
-      return;
-    }
 
     const payload = {
       ...student,
       gross_salary: numericGross.toFixed(2),
       pf_percent: numericPF.toFixed(2),
-      // pf_amount: pfAmount.toFixed(2),
-      // net_salary: netSalary.toFixed(2),
     };
 
     try {
       setSubmitting(true);
       await axios.post("http://localhost:3001/emp_list_test", payload);
-      alert("Employee added!");
+      toast.success("Employee added Sucessfully!");
       router.push("/employees-list-test");
     } catch (err) {
       console.error("Error submitting form", err);
-      alert("Submission failed. Check console.");
+      toast.error("Submission failed.");
     } finally {
       setSubmitting(false);
     }
   };
 
+  // reset
   const handleReset = () => {
     setStudent({
       fname: "",
       lname: "",
       gender: "",
       dob: "",
+      joining: "",
       emp_id: "",
       email: "",
       phone: "",
@@ -119,54 +141,62 @@ const Employees = () => {
     { label: "Other", value: "Other" },
   ];
 
-    const designationOptions = [
-    { label: "Associate Software Engineer", value: "Associate Software Engineer" },
-    { label: "Software Engineer", value: "Software Engineer" },
-    { label: "Senior Software Engineer", value: "Senior Software Engineer" },
-  ];
-
   return (
     <LayoutWrapper>
       <BasicBreadcrumbs heading="Add Employee Test" currentPage="Add Employees" />
       <Box className="customBox">
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            {/* Name fields */}
+            {/* Name */}
             <Grid size={3}>
               <BasicInput
-                label="First Name*"
+                label="First Name"
                 inputType="text"
                 name="fname"
                 value={student.fname}
                 onChange={handleChange}
+                required
               />
             </Grid>
             <Grid size={3}>
               <BasicInput
-                label="Last Name*"
+                label="Last Name"
                 inputType="text"
                 name="lname"
                 value={student.lname}
                 onChange={handleChange}
+                required
               />
             </Grid>
 
-            {/* Gender / DOB / Emp ID */}
+            {/* Gender / DOB / Joining / Emp ID */}
             <Grid size={3}>
               <SelectInput
                 label="Gender"
                 value={student.gender}
                 onChange={(val) => handleSelectChange("gender", val)}
                 options={genderOptions}
+                required
               />
             </Grid>
             <Grid size={3}>
               <BasicInput
-                label="Date Of Birth*"
+                label="Date Of Birth"
                 inputType="date"
                 name="dob"
                 value={student.dob}
                 onChange={handleChange}
+                required
+              />
+            </Grid>
+            <Grid size={3}>
+              <BasicInput
+                label="Date Of Joining"
+                inputType="date"
+                name="joining"
+                value={student.joining}
+                onChange={handleChange}
+                required
               />
             </Grid>
             <Grid size={3}>
@@ -176,10 +206,11 @@ const Employees = () => {
                 name="emp_id"
                 value={student.emp_id}
                 onChange={handleChange}
+                required
               />
             </Grid>
 
-            {/* Contact / Designation */}
+            {/* Contact */}
             <Grid size={3}>
               <BasicInput
                 label="Email"
@@ -187,6 +218,7 @@ const Employees = () => {
                 name="email"
                 value={student.email}
                 onChange={handleChange}
+                required
               />
             </Grid>
             <Grid size={3}>
@@ -196,18 +228,22 @@ const Employees = () => {
                 name="phone"
                 value={student.phone}
                 onChange={handleChange}
+                required
               />
             </Grid>
+
+            {/* Designation from API */}
             <Grid size={3}>
               <SelectInput
                 label="Designation"
                 value={student.des}
                 onChange={(val) => handleSelectChange("des", val)}
                 options={designationOptions}
+                required
               />
             </Grid>
 
-            {/* Salary / PF inputs */}
+            {/* Salary / PF */}
             <Grid size={3}>
               <BasicInput
                 label="Gross Salary"
@@ -215,7 +251,7 @@ const Employees = () => {
                 name="gross_salary"
                 value={grossSalary}
                 onChange={handleGrossChange}
-                // helperText="Base salary before PF deduction"
+                required
               />
             </Grid>
             <Grid size={3}>
@@ -225,7 +261,6 @@ const Employees = () => {
                 name="pf_percent"
                 value={pfPercent}
                 onChange={handlePfChange}
-                // helperText="Percentage deducted from gross"
               />
             </Grid>
 
@@ -241,7 +276,7 @@ const Employees = () => {
               />
             </Grid>
 
-            {/* Computed breakdown */}
+            {/* Computed Salary Breakdown */}
             <Grid size={12}>
               <Paper elevation={1} style={{ padding: 12 }}>
                 <Typography variant="subtitle2">Computed Breakdown</Typography>

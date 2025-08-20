@@ -5,11 +5,11 @@ import { Typography, Grid, Box, Stack } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { GridColDef } from "@mui/x-data-grid";
-import SelectInput from "@/component/selectTwo";
 import BasicBreadcrumbs from "@/component/BreadCrumb";
 import BasicInput from "@/component/custom-input";
 import CustomButton from "@/component/button";
 import DataTable from "@/component/Table";
+import { toast } from "react-toastify";
 
 const columns: GridColDef[] = [
   { field: "display_id", headerName: "ID", width: 70 },
@@ -61,7 +61,7 @@ const Designation = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!student.des) {
-      alert("Please fill all fields");
+      toast.warn("Please fill all fields");
       return;
     }
 
@@ -69,7 +69,8 @@ const Designation = () => {
       // UPDATE existing record
       try {
         await axios.put(`http://localhost:3001/des_list/${editId}`, student);
-        alert("Designation record updated successfully!");
+        toast.success("Designation record updated successfully!");
+
         setIsEditMode(false);
         setEditId(null);
         getAPI();
@@ -81,7 +82,7 @@ const Designation = () => {
       // CREATE new record
       try {
         await axios.post("http://localhost:3001/des_list", student);
-        alert("Designation created successfully!");
+        toast.success("Designation created successfully!");
         getAPI();
         resetForm();
       } catch (err) {
@@ -102,10 +103,12 @@ const Designation = () => {
   const remove = async (id: number) => {
     try {
       await axios.delete(`http://localhost:3001/des_list/${id}`);
+      toast.success("Designation Delete Successfully.");
       getAPI();
     } catch (error) {
       console.error("Failed to delete Designation", error);
       setError("Failed to delete Designation");
+      toast.error("❌ Failed to delete Designation!");
     }
   };
 
@@ -119,9 +122,7 @@ const Designation = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Designation List</Typography>
-      <BasicBreadcrumbs currentPage="Designation List" />
-
+      <BasicBreadcrumbs heading="Designation List" currentPage="Designation List" />
       {/* Form */}
       <Box className="customBox">
         <Typography variant="h5">

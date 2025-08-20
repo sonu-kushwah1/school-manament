@@ -6,6 +6,7 @@ import { Typography, Grid, Box } from "@mui/material";
 import styled from "./styled.module.css";
 import BasicBreadcrumbs from "@/component/BreadCrumb";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 // Types
 interface DashboardItem {
@@ -14,8 +15,22 @@ interface DashboardItem {
   no: string;
 }
 
+
 const Dashboard: React.FC = () => {
   const theme = useTheme();
+  const router = useRouter();
+
+
+  /*login token*/
+    useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      // 🚫 If no token, redirect to login
+      router.push("/login");
+    }
+  }, [router]);
+
 
   // State for dynamic values
   const [studentCount, setStudentCount] = useState("0");
