@@ -178,7 +178,7 @@ const Employees = () => {
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {/* Select existing employee */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Select Employee"
                 value={employee.fname}
@@ -191,7 +191,7 @@ const Employees = () => {
             </Grid>
 
             {/* EMP ID */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="EMP ID"
                 inputType="text"
@@ -203,7 +203,7 @@ const Employees = () => {
             </Grid>
 
             {/* Employee Name */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Employee Name"
                 inputType="text"
@@ -215,7 +215,7 @@ const Employees = () => {
             </Grid>
 
             {/* Increment Amount */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Increment Amount"
                 inputType="number"
@@ -232,7 +232,7 @@ const Employees = () => {
             </Grid>
 
             {/* PF % */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Provident Fund (%)"
                 inputType="number"
@@ -249,7 +249,7 @@ const Employees = () => {
             </Grid>
 
             {/* Designation */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Designation"
                 value={employee.des}

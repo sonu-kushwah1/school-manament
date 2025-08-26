@@ -32,6 +32,7 @@ import BasicInput from "@/component/custom-input";
 import CustomButton from "@/component/button";
 import BankDetails from "./bank-details";
 import PaySlip from "./payslip";
+import Profile from "./profile";
 
 // Info item reusable component
 type InfoItemProps = {
@@ -107,7 +108,7 @@ const Employees: React.FC = () => {
         <Grid container spacing={2}>
           {/* Left Column */}
           <Grid size={4}>
-            <Paper
+            {/* <Paper
               elevation={3}
               sx={{
                 borderRadius: 3,
@@ -115,7 +116,7 @@ const Employees: React.FC = () => {
                 position: "relative",
               }}
             >
-              {/* Banner Image */}
+             
               <Box
                 sx={{
                   height: 100,
@@ -125,7 +126,7 @@ const Employees: React.FC = () => {
                 }}
               />
 
-              {/* Avatar + Edit Button */}
+             
               <Box
                 sx={{
                   position: "relative",
@@ -152,7 +153,7 @@ const Employees: React.FC = () => {
                 </IconButton>
               </Box>
 
-              {/* Name & Role */}
+         
               <Box textAlign="center" mt={1}>
                 <Typography variant="h6" fontWeight="bold">
                   George Arafat
@@ -167,7 +168,7 @@ const Employees: React.FC = () => {
 
               <Divider sx={{ my: 2 }} />
 
-              {/* Basic Information */}
+             
               <Box px={2} pb={2}>
                 <Typography variant="subtitle1" fontWeight="bold">
                   Basic Information
@@ -199,7 +200,9 @@ const Employees: React.FC = () => {
                   />
                 </Stack>
               </Box>
-            </Paper>
+            </Paper> */}
+
+            <Profile/>
           </Grid>
 
           {/* Right Column */}

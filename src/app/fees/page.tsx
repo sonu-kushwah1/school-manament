@@ -181,7 +181,7 @@ const getAPI = async () => {
         </Typography>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid size={6}>
+            <Grid size={{ xs: 12, md: 6, lg:6 }}>
               <SelectInput
                 label="Class"
                 value={student.class}
@@ -189,7 +189,7 @@ const getAPI = async () => {
                 options={classOptions}
               />
             </Grid>
-            <Grid size={6}>
+             <Grid size={{ xs: 12, md: 6, lg:6 }}>
               <BasicInput
                 label="Fees"
                 inputType="text"

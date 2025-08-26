@@ -152,11 +152,7 @@ const Employees = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5" mb={1}>
-        Employees Salary Management
-      </Typography>
-      <BasicBreadcrumbs currentPage="Employees Salary Management" />
-
+      <BasicBreadcrumbs heading="Employees Salary Managment" currentPage="Employees Salary Management" />
       <Box className="customBox" sx={{ mt: 2 }}>
         {error && (
           <Typography color="error" mb={2}>
@@ -166,7 +162,7 @@ const Employees = () => {
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {/* Select existing employee */}
-             <Grid size={3}>
+             <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Select Employee"
                 value={employee.fname}
@@ -176,7 +172,7 @@ const Employees = () => {
             </Grid>
 
             {/* EMP ID */}
-             <Grid size={3}>
+             <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="EMP ID"
                 inputType="text"
@@ -187,7 +183,7 @@ const Employees = () => {
             </Grid>
 
             {/* Employee Name */}
-             <Grid size={3}>
+             <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Employee Name"
                 inputType="text"
@@ -198,7 +194,7 @@ const Employees = () => {
             </Grid>
 
             {/* Base Salary */}
-             <Grid size={3}>
+             <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Salary (Base)"
                 inputType="number"
@@ -209,7 +205,7 @@ const Employees = () => {
             </Grid>
 
             {/* Salary Increment % */}
-             <Grid size={3}>
+             <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Salary Increment (%)"
                 inputType="number"
@@ -220,7 +216,7 @@ const Employees = () => {
             </Grid>
 
             {/* Salary computed summary */}
-             <Grid size={3}>
+             <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <Typography variant="body2" sx={{ mt: 1 }}>
                 Increment Amt: {salaryIncrementAmount.toFixed(2)}
               </Typography>
@@ -230,7 +226,7 @@ const Employees = () => {
             </Grid>
 
             {/* PF % */}
-             <Grid size={3}>
+             <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Provident Fund (%)"
                 inputType="number"
@@ -244,7 +240,7 @@ const Employees = () => {
             </Grid>
 
             {/* Insurance % */}
-             <Grid size={3}>
+             <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Insurance"
                 inputType="text"
@@ -258,7 +254,7 @@ const Employees = () => {
             </Grid>
 
             {/* Designation */}
-             <Grid size={3}>
+             <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Designation"
                 value={employee.des}

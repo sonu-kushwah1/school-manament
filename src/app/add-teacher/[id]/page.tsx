@@ -116,39 +116,38 @@ const EditTeacher: React.FC = () => {
   ];
   return (
     <LayoutWrapper>
-      <Typography variant="h5">Update Teacher</Typography>
-      <BasicBreadcrumbs currentPage="Update Teacher" />
+      <BasicBreadcrumbs heading="Update Teacher" currentPage="Update Teacher" />
       <Paper className="innerWrapper" style={{ padding: "1.5rem", marginTop: "1rem" }}>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput label="First Name" inputType="text" name="fname" value={formData.fname} onChange={handleChange} />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput label="Last Name" inputType="text" name="lname" value={formData.lname} onChange={handleChange} />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput label="Gender" value={formData.gender} onChange={(val) => handleSelectChange("gender", val)} options={genderOptions} />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput label="Email" inputType="email" name="email" value={formData.email} onChange={handleChange} />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput label="Phone" inputType="text" name="phone" value={formData.phone} onChange={handleChange} />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput label="Date of Birth" inputType="date" name="dob" value={formData.dob} onChange={handleChange} />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput label="City" value={formData.city} onChange={(val) => handleSelectChange("city", val)} options={cityOptions} />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput label="Univercity" value={formData.univercity} onChange={(val) => handleSelectChange("univercity", val)} options={univercityOptions} />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput label="Degree" value={formData.degree} onChange={(val) => handleSelectChange("degree", val)} options={degreeOptions} />
             </Grid>
-               <Grid size={3}>
+               <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Subject"
                 value={formData.subject}

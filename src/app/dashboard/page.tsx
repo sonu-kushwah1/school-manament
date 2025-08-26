@@ -7,6 +7,7 @@ import styled from "./styled.module.css";
 import BasicBreadcrumbs from "@/component/BreadCrumb";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import LayoutWrapper2 from "@/component/Layout";
 
 // Types
 interface DashboardItem {
@@ -15,14 +16,12 @@ interface DashboardItem {
   no: string;
 }
 
-
 const Dashboard: React.FC = () => {
   const theme = useTheme();
   const router = useRouter();
 
-
   /*login token*/
-    useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -30,7 +29,6 @@ const Dashboard: React.FC = () => {
       router.push("/login");
     }
   }, [router]);
-
 
   // State for dynamic values
   const [studentCount, setStudentCount] = useState("0");
@@ -84,7 +82,7 @@ const Dashboard: React.FC = () => {
 
         <Grid container spacing={2}>
           {DashboardData.map((item) => (
-            <Grid size={4} key={item.id}>
+             <Grid size={{ xs: 12, md: 6, lg:4 }} key={item.id}>
               <Box
                 className={styled.dashboardCard}
                 sx={{
@@ -95,7 +93,9 @@ const Dashboard: React.FC = () => {
                 }}
               >
                 <Typography variant="h6">{item.title}</Typography>
-                <Typography variant="h4" sx={{color:"white"}}>{item.no}</Typography>
+                <Typography variant="h4" sx={{ color: "white" }}>
+                  {item.no}
+                </Typography>
               </Box>
             </Grid>
           ))}

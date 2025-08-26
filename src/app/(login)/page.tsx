@@ -10,6 +10,7 @@ import CustomButton from "@/component/button";
 import SimpleAlert from "@/component/alert";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useAuth } from "@/context/AuthContext"; // ✅ import auth
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -23,6 +24,7 @@ function Login() {
   >(null);
 
   const router = useRouter();
+  const { login } = useAuth(); // ✅ use login function from context
 
   const handleLogin = async () => {
     try {
@@ -43,10 +45,10 @@ function Login() {
 
       const data = await res.json();
 
-      // ✅ Save token + user to localStorage
-      localStorage.setItem("token", data.accessToken);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      // ✅ Call login from context instead of localStorage directly
+      login(data.user, data.accessToken);
 
+      setAlertSeverity("success");
       setAlertMessage("Login successful!");
       toast.success("Login Successfully.");
 
@@ -54,6 +56,7 @@ function Login() {
         router.push("/dashboard");
       }, 1000);
     } catch (err: any) {
+      setAlertSeverity("error");
       setAlertMessage(err.message || "Login failed");
       toast.error("Please Check User Name or Password.");
     }

@@ -189,7 +189,7 @@ const AddTeacher: React.FC = () => {
       >
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="First Name"
                 inputType="text"
@@ -199,7 +199,7 @@ const AddTeacher: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Last Name"
                 inputType="text"
@@ -209,7 +209,7 @@ const AddTeacher: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Gender"
                 value={formData.gender}
@@ -218,7 +218,7 @@ const AddTeacher: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Email"
                 inputType="email"
@@ -228,7 +228,7 @@ const AddTeacher: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Phone"
                 inputType="text"
@@ -238,7 +238,7 @@ const AddTeacher: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Date Of Birth"
                 inputType="date"
@@ -248,7 +248,7 @@ const AddTeacher: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="City"
                 value={formData.city}
@@ -257,7 +257,7 @@ const AddTeacher: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Univercity"
                 value={formData.univercity}
@@ -266,7 +266,7 @@ const AddTeacher: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Degree"
                 value={formData.degree}
@@ -275,7 +275,7 @@ const AddTeacher: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Subject"
                 value={formData.subject}

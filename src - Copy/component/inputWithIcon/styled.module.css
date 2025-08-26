@@ -1,0 +1,21 @@
+.InputIcon{
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgray;
+    padding: 10px;
+    background-color:#e9e7e7;
+    margin-bottom: 15px;
+}   
+.InputIcon input,.InputIcon input:focus{
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+.InputIcon input{
+    padding-left: 10px;
+    background-color: transparent;
+}
+.InputIcon svg{
+    width: 19px;
+    height: 19px;
+}

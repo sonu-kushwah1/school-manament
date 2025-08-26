@@ -248,6 +248,19 @@ ul{
   display: inline-block;
   margin-bottom: 5px;
 }
+
+/*mobile view*/
+@media (max-width: 991px) {
+  .mainPageAdd{
+    margin-left: 0px;
+ }
+ .sidebar_toggle{
+  display: none;
+ }
+ .mainPage{
+  margin-left:0;
+ }
+}
 /* .sidebar_toggle .submenu .MuiSvgIcon-root{
   display: none;
 } */

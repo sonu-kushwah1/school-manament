@@ -1,39 +1,47 @@
 "use client";
-import React, { ReactNode,useState,useEffect } from "react";
+import React, { ReactNode, useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import Footer from "../Footer";
+import ProtectedRoute from "../ProtectedRoute";
 
-interface LayoutWrapperProps {
+interface LayoutWrapper2Props {
   children: ReactNode;
 }
 
-const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const LayoutWrapper: React.FC<LayoutWrapper2Props> = ({ children }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // default desktop ke liye open
 
   useEffect(() => {
-    // Only run this in the browser
     if (typeof window !== "undefined") {
-      const isMobile = window.matchMedia("(max-width: 767px)").matches;
-      if (isMobile) {
-        setIsSidebarOpen(true);
-      }
+      const checkScreen = () => {
+        const isMobile = window.matchMedia("(max-width: 991px)").matches;
+        setIsSidebarOpen(isMobile); // 👈 mobile => false, desktop => true
+      };
+
+      checkScreen(); // initial check
+      window.addEventListener("resize", checkScreen);
+
+      return () => window.removeEventListener("resize", checkScreen);
     }
   }, []);
 
   const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+    setIsSidebarOpen((prev) => !prev);
   };
+
   return (
-    <Box>
-      <Header toggleSidebar={toggleSidebar} />
-      <Sidebar isSidebarOpen={isSidebarOpen}  />
-      <div className={`mainPage ${isSidebarOpen ? "mainPageAdd" : ""}`}>
-        {children}
-      </div>
-      <Footer></Footer>
-    </Box>
+    <ProtectedRoute>
+      <Box>
+        <Header toggleSidebar={toggleSidebar} />
+        <Sidebar isSidebarOpen={isSidebarOpen} />
+        <div className={`mainPage ${isSidebarOpen ? "mainPageAdd" : ""}`}>
+          {children}
+        </div>
+        <Footer />
+      </Box>
+    </ProtectedRoute>
   );
 };
 

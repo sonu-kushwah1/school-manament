@@ -11,11 +11,9 @@ import {
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import DescriptionIcon from "@mui/icons-material/Description";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
-import PersonIcon from "@mui/icons-material/Person";
 import SettingsAccessibilityIcon from '@mui/icons-material/SettingsAccessibility';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import InfoIcon from "@mui/icons-material/Info";
@@ -31,6 +29,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
   const pathname = usePathname();
+  
 
   // Use one object to track open states
   const [openMenus, setOpenMenus] = useState({
@@ -40,6 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
     fees: false,
     hrms: false,
   });
+  
 
   const toggleMenu = (menu: keyof typeof openMenus) => {
     setOpenMenus((prev) => ({ ...prev, [menu]: !prev[menu] }));

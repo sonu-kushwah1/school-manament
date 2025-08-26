@@ -10,12 +10,10 @@ import CustomTextarea from "@/component/TextArea";
 import axios from "axios";
 import { useRouter, useParams } from "next/navigation";
 
-
 import { toast } from "react-toastify";
 
 const AddStudent: React.FC = () => {
-
-   // Dropdown options
+  // Dropdown options
   const genderOptions = [
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
@@ -54,50 +52,51 @@ const AddStudent: React.FC = () => {
     address: "",
   });
 
-const [feesList, setFeesList] = useState<any[]>([]);
-const [classOptions, setClassOptions] = useState<{ label: string; value: string }[]>([]);
+  const [feesList, setFeesList] = useState<any[]>([]);
+  const [classOptions, setClassOptions] = useState<
+    { label: string; value: string }[]
+  >([]);
 
-// Fetch fees_list from API
-useEffect(() => {
-  axios
-    .get("http://localhost:3001/fees_list")
-    .then((res) => {
-      const order = [
-        "Nursery",
-        "L.K.G",
-        "U.K.G",
-        "1st",
-        "2nd",
-        "3rd",
-        "4th",
-        "5th",
-        "6th",
-        "7th",
-        "8th",
-        "9th",
-        "10th",
-        "11th",
-        "12th",
-      ];
+  // Fetch fees_list from API
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/fees_list")
+      .then((res) => {
+        const order = [
+          "Nursery",
+          "L.K.G",
+          "U.K.G",
+          "1st",
+          "2nd",
+          "3rd",
+          "4th",
+          "5th",
+          "6th",
+          "7th",
+          "8th",
+          "9th",
+          "10th",
+          "11th",
+          "12th",
+        ];
 
-      // sort API data by class
-      const sortedData = res.data.sort(
-        (a: any, b: any) => order.indexOf(a.class) - order.indexOf(b.class)
-      );
+        // sort API data by class
+        const sortedData = res.data.sort(
+          (a: any, b: any) => order.indexOf(a.class) - order.indexOf(b.class)
+        );
 
-      setFeesList(sortedData);
+        setFeesList(sortedData);
 
-      // also set sorted classOptions
-      setClassOptions(
-        sortedData.map((item: any) => ({
-          label: item.class,
-          value: item.class,
-        }))
-      );
-    })
-    .catch((err) => console.error("Error fetching fees list:", err));
-}, []);
-
+        // also set sorted classOptions
+        setClassOptions(
+          sortedData.map((item: any) => ({
+            label: item.class,
+            value: item.class,
+          }))
+        );
+      })
+      .catch((err) => console.error("Error fetching fees list:", err));
+  }, []);
 
   // If editing student
   useEffect(() => {
@@ -110,7 +109,9 @@ useEffect(() => {
   }, [id]);
 
   // Input handler
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setStudent((prev) => ({ ...prev, [name]: value }));
   };
@@ -136,7 +137,7 @@ useEffect(() => {
     try {
       if (id) {
         await axios.put(`http://localhost:3001/student_list/${id}`, student);
-       toast.success("Student updated!");
+        toast.success("Student updated!");
       } else {
         await axios.post("http://localhost:3001/student_list", student);
         toast.success("Student added!");
@@ -147,19 +148,20 @@ useEffect(() => {
     }
   };
 
- 
-
   return (
     <LayoutWrapper>
       <BasicBreadcrumbs
         heading={id ? "Edit Student" : "Add New Student"}
         currentPage={id ? "Edit Student" : "Add New Student"}
       />
-      <Paper className="innerWrapper" style={{ padding: "1.5rem", marginTop: "1rem" }}>
+      <Paper
+        className="innerWrapper"
+        style={{ padding: "1.5rem", marginTop: "1rem" }}
+      >
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {/* First Name */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="First Name*"
                 inputType="text"
@@ -170,91 +172,91 @@ useEffect(() => {
               />
             </Grid>
             {/* Last Name */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Last Name*"
                 inputType="text"
                 name="lname"
                 value={student.lname}
                 onChange={handleChange}
-                required  
+                required
               />
             </Grid>
             {/* Gender */}
-            <Grid size={3}>
+           <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Gender"
                 value={student.gender}
                 onChange={(val) => handleSelectChange("gender", val)}
                 options={genderOptions}
-               required  
+                required
               />
             </Grid>
             {/* DOB */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Date Of Birth*"
                 inputType="date"
                 name="dob"
                 value={student.dob}
                 onChange={handleChange}
-                required  
+                required
               />
             </Grid>
             {/* Roll No */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Roll No"
                 inputType="text"
                 name="roll_no"
                 value={student.roll_no}
                 onChange={handleChange}
-                required  
+                required
               />
             </Grid>
             {/* Blood Group */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Blood Group"
                 value={student.blood_group}
                 onChange={(val) => handleSelectChange("blood_group", val)}
                 options={bloodOptions}
-                 required  
+                required
               />
             </Grid>
             {/* Religion */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Religion*"
                 value={student.religion}
                 onChange={(val) => handleSelectChange("religion", val)}
                 options={religionOptions}
-                required 
+                required
               />
             </Grid>
             {/* Email */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Email"
                 inputType="email"
                 name="email"
                 value={student.email}
                 onChange={handleChange}
-                required  
+                required
               />
             </Grid>
             {/* Class */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Class"
                 value={student.class}
                 onChange={(val) => handleSelectChange("class", val)}
                 options={classOptions} // from API
-                 required  
+                required
               />
             </Grid>
             {/* Fees (auto-filled, read-only) */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Fees"
                 inputType="number"
@@ -262,30 +264,35 @@ useEffect(() => {
                 value={student.fees}
                 onChange={handleChange}
                 disabled // read-only
-                required  
+                required
               />
             </Grid>
             {/* Admission ID */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Admission ID"
                 inputType="text"
                 name="admission_id"
                 value={student.admission_id}
                 onChange={handleChange}
-                required  
+                required
               />
-              
             </Grid>
             {/* Phone */}
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Phone"
                 inputType="text"
                 name="phone"
                 value={student.phone}
-                onChange={handleChange}
-                required  
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^\d{0,10}$/.test(value)) {
+                    setStudent((prev) => ({ ...prev, phone: value }));
+                  }
+                }}
+                inputProps={{ maxLength: 10 }} //
+                required
               />
             </Grid>
 

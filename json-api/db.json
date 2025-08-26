@@ -129,6 +129,21 @@
       "pf_amount": 9600,
       "net_salary": 70400,
       "id": "31ea"
+    },
+    {
+      "id": "6577",
+      "fname": "Kumesh",
+      "lname": "Kushwah",
+      "gender": "Male",
+      "dob": "2025-08-06",
+      "joining": "2025-08-22",
+      "emp_id": "EMP5",
+      "email": "kumesh@gmail.com",
+      "phone": "8358957395",
+      "des": "Associate Software Engineer",
+      "address": "",
+      "gross_salary": "12000.00",
+      "pf_percent": "11.00"
     }
   ],
   "emp_bank_details": [
@@ -390,6 +405,23 @@
       "phone": "8358957395",
       "image": "",
       "address": "Anand Nagar\n140"
+    },
+    {
+      "id": "75d4",
+      "fname": "Bhupnesh",
+      "lname": "Kushwah",
+      "gender": "Male",
+      "dob": "2025-08-06",
+      "roll_no": "121",
+      "blood_group": "A+",
+      "religion": "Hindu",
+      "email": "sonu@gmail.com",
+      "class": "2nd",
+      "fees": "14000",
+      "admission_id": "121",
+      "phone": "phone number",
+      "image": "",
+      "address": ""
     }
   ],
   "fees_list": [

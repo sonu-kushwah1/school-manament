@@ -1,0 +1,15 @@
+.basicInput input,.basicInput input:focus{
+  /* width: 100%;
+  border: 1px solid #c4c4c4;
+  border: none;
+  padding: 15px 15px;
+  outline:none;
+  border-radius: 1px;
+  box-shadow: none;
+  outline: none;
+  background-color: white; */
+}
+.basicInput label{
+  padding-bottom: 8px;
+  color: #646464;
+}

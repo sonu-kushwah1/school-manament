@@ -153,7 +153,7 @@ const FeesSub: React.FC = () => {
       <Box className="customBox" mb={3}>
         <form>
           <Grid container spacing={2}>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 6, lg:3 }}>
               <SelectInput
                 label="Class"
                 value={selectedClass}
@@ -164,7 +164,7 @@ const FeesSub: React.FC = () => {
                 options={classOptions}
               />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 6, lg:3 }}>
               <SelectInput
                 label="Student Name"
                 value={selectedStudent}
@@ -172,7 +172,7 @@ const FeesSub: React.FC = () => {
                 options={studentOptions}
               />
             </Grid>
-            <Grid size={3}>
+            <Grid size={{ xs: 12, md: 6, lg:3 }}>
               <BasicInput
                 label="Fees Fees"
                 inputType="number"
