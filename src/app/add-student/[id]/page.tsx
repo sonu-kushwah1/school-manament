@@ -147,8 +147,8 @@ const UpdateStudent: React.FC = () => {
   return (
     <LayoutWrapper>
       <BasicBreadcrumbs
-        heading="Update Student Record"
-        currentPage="Update Student Record"
+        heading="Edit Student"
+        currentPage="Edit Student"
       />
       <Paper
         className="innerWrapper"

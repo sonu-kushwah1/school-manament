@@ -6,6 +6,8 @@ import BasicBreadcrumbs from "@/component/BreadCrumb";
 import BasicInput from "@/component/custom-input";
 import CustomButton from "@/component/button";
 import axios from "axios";
+import { toast } from "react-toastify";
+
 
 const API_URL = "http://localhost:3001/setting_list";
 
@@ -32,35 +34,35 @@ const Setting: React.FC = () => {
   // Upload PDF
   const handleUpload = async () => {
     if (!file) {
-      alert("Please select a PDF file!");
+      toast.warning("Please select a PDF file!");
       return;
     }
 
     try {
       const res = await axios.post(API_URL, { holiday: file.name });
       setUploadedFile(res.data);
-      alert("PDF uploaded successfully!");
+      toast.success("PDF uploaded successfully!");
       setFile(null);
     } catch (err) {
       console.error(err);
-      alert("Upload failed!");
+      toast.error("Upload failed!");
     }
   };
 
   // Delete PDF
   const handleDelete = async () => {
     if (!uploadedFile) {
-      alert("No file to delete!");
+      toast.warning("No file to delete!");
       return;
     }
 
     try {
       await axios.delete(`${API_URL}/${uploadedFile.id}`);
       setUploadedFile(null);
-      alert("PDF deleted successfully!");
+      toast.success("PDF deleted successfully!");
     } catch (err) {
       console.error(err);
-      alert("Delete failed!");
+      toast.error("Delete failed!");
     }
   };
 

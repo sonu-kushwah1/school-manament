@@ -1,32 +1,36 @@
 "use client";
-import * as React from 'react';
-import { useRouter } from 'next/navigation';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import * as React from "react";
+import { useRouter } from "next/navigation";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import SearchIcon from "@mui/icons-material/Search";
+import InputWithIcon from "../inputWithIcon"; // custom component
+
 
 type HeaderProps = {
   toggleSidebar: () => void;
 };
 
 const settings = [
-  { label: 'Profile', path: '/emp-profile' },
-  { label: 'Dashboard', path: '/dashboard' },
-  { label: 'Logout', path: '/' },
+  { label: "Profile", path: "/emp-profile" },
+  { label: "Dashboard", path: "/dashboard" },
+  { label: "Logout", path: "/" },
 ];
 
 const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   const router = useRouter();
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -41,6 +45,15 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
     router.push(path);
   };
 
+  /* search bar state */
+  const [searchBar, setSearchBar] = React.useState("");
+
+  const handleSearch = () => {
+    if (searchBar.trim()) {
+      router.push(`/search?query=${encodeURIComponent(searchBar)}`);
+    }
+  };
+
   return (
     <AppBar position="fixed" className="header">
       <Container maxWidth="xl">
@@ -53,19 +66,19 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
             href="#"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             Payroll & HR
           </Typography>
 
           {/* Mobile Menu Button */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="menu"
@@ -77,7 +90,6 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
           </Box>
 
           {/* Mobile Logo */}
-          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
@@ -85,20 +97,26 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
             href="#"
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             LOGO
           </Typography>
 
-          {/* Desktop Sidebar Toggle */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          {/* Desktop Sidebar Toggle + Search */}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              alignItems: "center",
+            }}
+          >
             <IconButton
               size="large"
               edge="start"
@@ -106,8 +124,28 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
               sx={{ mr: 2 }}
               onClick={toggleSidebar}
             >
-              <MenuIcon sx={{ color: 'black' }} />
+              <MenuIcon sx={{ color: "black" }} />
             </IconButton>
+
+            {/* Search Input */}
+            <InputWithIcon
+              icon={<SearchIcon />}
+              sx={{background:"white",width:"70%",marginBottom:"0"}}
+              type="text"
+              placeholder="Search..."
+              onChange={(e) => setSearchBar(e.target.value)}
+              value={searchBar}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
+            />
+
+            {/* Search Button */}
+            {/* <button onClick={handleSearch}>
+               Search
+            </button> */}
           </Box>
 
           {/* User Avatar Menu */}
@@ -117,16 +155,20 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
+
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               anchorEl={anchorElUser}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
-              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              transformOrigin={{ vertical: "top", horizontal: "right" }}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting.label} onClick={() => handleMenuClick(setting.path)}>
+                <MenuItem
+                  key={setting.label}
+                  onClick={() => handleMenuClick(setting.path)}
+                >
                   <Typography textAlign="center">{setting.label}</Typography>
                 </MenuItem>
               ))}

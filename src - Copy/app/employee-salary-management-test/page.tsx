@@ -147,13 +147,14 @@ const Employees = () => {
         };
 
         await axios.post("http://localhost:3001/emp_list_test", newEmployee);
-        alert("Employee added!");
+        toast.success("Employee added successfully!");
       }
 
       await fetchEmployees();
       router.push("/employees-list-test");
     } catch (err) {
       console.error(err);
+      toast.error("Submission failed.");
       setError("Submission failed.");
     } finally {
       setSubmitting(false);

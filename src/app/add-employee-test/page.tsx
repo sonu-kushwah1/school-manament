@@ -151,7 +151,7 @@ const Employees = () => {
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {/* Name */}
-            <Grid size={3}>
+              <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="First Name"
                 inputType="text"
@@ -161,7 +161,7 @@ const Employees = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+              <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Last Name"
                 inputType="text"
@@ -173,7 +173,7 @@ const Employees = () => {
             </Grid>
 
             {/* Gender / DOB / Joining / Emp ID */}
-            <Grid size={3}>
+              <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Gender"
                 value={Emp.gender}
@@ -182,7 +182,7 @@ const Employees = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+              <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Date Of Birth"
                 inputType="date"
@@ -192,7 +192,7 @@ const Employees = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+              <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Date Of Joining"
                 inputType="date"
@@ -202,7 +202,7 @@ const Employees = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+              <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="EMP ID"
                 inputType="text"
@@ -214,7 +214,7 @@ const Employees = () => {
             </Grid>
 
             {/* Contact */}
-            <Grid size={3}>
+              <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Email"
                 inputType="email"
@@ -224,7 +224,7 @@ const Employees = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+              <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Phone"
                 inputType="text"
@@ -242,7 +242,7 @@ const Employees = () => {
             </Grid>
 
             {/* Designation from API */}
-            <Grid size={3}>
+              <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Designation"
                 value={Emp.des}
@@ -253,7 +253,7 @@ const Employees = () => {
             </Grid>
 
             {/* Salary / PF */}
-            <Grid size={3}>
+              <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Gross Salary"
                 inputType="number"
@@ -263,7 +263,7 @@ const Employees = () => {
                 required
               />
             </Grid>
-            <Grid size={3}>
+              <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="PF %"
                 inputType="number"

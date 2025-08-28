@@ -10,33 +10,30 @@ import CustomButton from "@/component/button";
 import SimpleAlert from "@/component/alert";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { useAuth } from "@/context/AuthContext"; // ✅ import auth
+import { useAuth } from "@/context/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  // Alert state
   const [alertMessage, setAlertMessage] = useState("");
   const [alertSeverity, setAlertSeverity] = useState<
     "error" | "warning" | "info" | "success" | null
   >(null);
 
   const router = useRouter();
-  const { login } = useAuth(); // ✅ use login function from context
+  const { login } = useAuth();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault(); // ✅ prevent form refresh
     try {
       const res = await fetch("http://localhost:5000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (!res.ok) {
@@ -44,8 +41,6 @@ function Login() {
       }
 
       const data = await res.json();
-
-      // ✅ Call login from context instead of localStorage directly
       login(data.user, data.accessToken);
 
       setAlertSeverity("success");
@@ -76,31 +71,34 @@ function Login() {
         </Box>
       )}
 
-      <InputWithIcon
-        icon={<EmailIcon />}
-        type="email"
-        placeholder="Email Address"
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-      />
-
-      <InputWithIcon
-        icon={showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-        type={showPassword ? "text" : "password"}
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-        onIconClick={() => setShowPassword(!showPassword)}
-      />
-
-      <Box sx={{ textAlign: "center" }}>
-        <CustomButton
-          label="Login"
-          variant="contained"
-          className="loginBtn"
-          onClick={handleLogin}
+      {/* ✅ Wrap inputs in form so Enter works */}
+      <form onSubmit={handleLogin}>
+        <InputWithIcon
+          icon={<EmailIcon />}
+          type="email"
+          placeholder="Email Address"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
         />
-      </Box>
+
+        <InputWithIcon
+          icon={showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+          type={showPassword ? "text" : "password"}
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          onIconClick={() => setShowPassword(!showPassword)}
+        />
+
+        <Box sx={{ textAlign: "center", mt: 2 }}>
+          <CustomButton
+            label="Login"
+            variant="contained"
+            className="loginBtn"
+            type="submit" // form submit triggers Enter as well
+          />
+        </Box>
+      </form>
     </Box>
   );
 }

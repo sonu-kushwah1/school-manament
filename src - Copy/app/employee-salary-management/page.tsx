@@ -8,6 +8,7 @@ import SelectInput from "@/component/selectTwo";
 import CustomButton from "@/component/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 interface Employee {
   id?: number;
@@ -129,15 +130,16 @@ const Employees = () => {
       };
       if (isEditMode && editId !== null) {
         await axios.put(`http://localhost:3001/emp_list/${editId}`, payload);
-        alert("Employee updated!");
+        toast.success("Employee updated Successfully!");
       } else {
         await axios.post("http://localhost:3001/emp_list", payload);
-        alert("Employee added!");
+        toast.success("Employee added Successfully!");
       }
       await getAPI();
       router.push("/employees");
     } catch (err) {
       console.error("Error submitting form", err);
+      toast.error("Error submitting form")
       setError("Failed to submit form.");
     } finally {
       setSubmitting(false);
@@ -152,10 +154,7 @@ const Employees = () => {
 
   return (
     <LayoutWrapper>
-      <Typography variant="h5" mb={1}>
-        Employees Salary Management
-      </Typography>
-      <BasicBreadcrumbs currentPage="Employees Salary Management" />
+      <BasicBreadcrumbs heading="Employees Salary Management" currentPage="Employees Salary Management" />
 
       <Box className="customBox" sx={{ mt: 2 }}>
         {error && (

@@ -117,7 +117,7 @@ const Employees = () => {
       />
       <form>
         <Grid container spacing={2} alignItems="flex-end">
-          <Grid size={3}>
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
             <SelectInput
               label="Designation"
               value={selectedDes}
@@ -126,7 +126,7 @@ const Employees = () => {
             />
           </Grid>
 
-          <Grid size={1}>
+           <Grid size={{ xs: 3, md: 4, lg:1 }}>
             <CustomButton
               label="Reset"
               onClick={() => {
@@ -136,7 +136,7 @@ const Employees = () => {
             />
           </Grid>
 
-          <Grid size={3}>
+            <Grid size={{ xs: 6, md: 4, lg:1 }}>
             <CustomButton
               label="Add Employees"
               onClick={() => {

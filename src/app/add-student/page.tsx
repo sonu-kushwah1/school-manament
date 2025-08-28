@@ -9,7 +9,6 @@ import CustomButton from "@/component/button";
 import CustomTextarea from "@/component/TextArea";
 import axios from "axios";
 import { useRouter, useParams } from "next/navigation";
-
 import { toast } from "react-toastify";
 
 const AddStudent: React.FC = () => {
@@ -151,8 +150,8 @@ const AddStudent: React.FC = () => {
   return (
     <LayoutWrapper>
       <BasicBreadcrumbs
-        heading={id ? "Edit Student" : "Add New Student"}
-        currentPage={id ? "Edit Student" : "Add New Student"}
+        heading="Add New Student"
+        currentPage="Add New Student"
       />
       <Paper
         className="innerWrapper"

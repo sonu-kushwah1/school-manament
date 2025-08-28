@@ -8,22 +8,12 @@ import CustomTextarea from "@/component/TextArea";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import LayoutWrapper from "@/component/Layout";
 import BasicBreadcrumbs from "@/component/BreadCrumb";
-
-interface UpdateEmployee {
-  id?: number;
-  emp_id: string;
-  fname: string;
-  salary: string;
-  increment_salary: string;
-  gross_salary: string;
-  pf_percent: string;
-  des: string;
-  display_id?: number;
-}
+import { toast } from "react-toastify";
 
 const UpdateEmployee = () => {
   const router = useRouter();
   const { id } = useParams(); // get employee id from URL
+
   const [employee, setemployee] = useState({
     fname: "",
     lname: "",
@@ -39,9 +29,10 @@ const UpdateEmployee = () => {
 
   const [grossSalary, setGrossSalary] = useState("");
   const [pfPercent, setPfPercent] = useState("");
+  const [designationOptions, setDesignationOptions] = useState<any[]>([]);
   const [error, setError] = useState("");
 
-  // Fetch employee data
+  // ✅ Fetch employee data by id
   useEffect(() => {
     if (!id) return;
     const fetchData = async () => {
@@ -50,6 +41,7 @@ const UpdateEmployee = () => {
           `http://localhost:3001/emp_list_test/${id}`
         );
         const data = response.data;
+
         setemployee({
           fname: data.fname || "",
           lname: data.lname || "",
@@ -62,6 +54,7 @@ const UpdateEmployee = () => {
           des: data.des || "",
           address: data.address || "",
         });
+
         setGrossSalary(
           data.gross_salary !== undefined ? String(data.gross_salary) : ""
         );
@@ -69,19 +62,42 @@ const UpdateEmployee = () => {
           data.pf_percent !== undefined ? String(data.pf_percent) : ""
         );
       } catch (err) {
-        console.error("Error fetching data", err);
+        console.error("Error fetching employee data", err);
         setError("Failed to fetch employee details.");
       }
     };
     fetchData();
   }, [id]);
 
-  // Update handler
+  // ✅ Fetch designation list from API
+  useEffect(() => {
+    const fetchDesignations = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/des_list");
+        console.log("Designation API Response:", response.data);
+
+        const list = response.data;
+
+        // Map API fields dynamically
+        const formatted = list.map((item: any) => ({
+          label: item.name || item.des || item.title || `Des ${item.id}`,
+          value: item.name || item.des || item.title || `Des ${item.id}`,
+        }));
+
+        setDesignationOptions(formatted);
+      } catch (err) {
+        console.error("Error fetching designations", err);
+      }
+    };
+    fetchDesignations();
+  }, []);
+
+  // ✅ Update employee
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const gross = parseFloat(grossSalary);
-      const pf = parseFloat(pfPercent);
+      const gross = parseFloat(grossSalary) || 0;
+      const pf = parseFloat(pfPercent) || 0;
       const pf_amount = (gross * pf) / 100;
       const net_salary = gross - pf_amount;
 
@@ -94,11 +110,11 @@ const UpdateEmployee = () => {
       };
 
       await axios.put(`http://localhost:3001/emp_list_test/${id}`, updatedData);
-      router.push("/employees-list-test"); // redirect to list page
-      console.log("emp data", updatedData);
-      alert("Employees Update Successfuly..");
+      toast.success("Employee updated successfully!");
+      router.push("/employees-list-test");
     } catch (err) {
       console.error("Update failed", err);
+      toast.error("Failed to update employee.");
       setError("Failed to update employee.");
     }
   };
@@ -108,39 +124,35 @@ const UpdateEmployee = () => {
   ) => {
     setemployee({ ...employee, [e.target.name]: e.target.value });
   };
+
   const handleSelectChange = (name: keyof typeof employee, value: string) => {
     setemployee((prev) => ({ ...prev, [name]: value }));
   };
+
   const genderOptions = [
     { label: "Male", value: "Male" },
     { label: "Female", value: "Female" },
     { label: "Other", value: "Other" },
   ];
 
-  const designationOptions = [
-    {
-      label: "Associate Software Engineer",
-      value: "Associate Software Engineer",
-    },
-    { label: "Software Engineer", value: "Software Engineer" },
-    { label: "Senior Software Engineer", value: "Senior Software Engineer" },
-  ];
-
   return (
     <LayoutWrapper>
       <BasicBreadcrumbs
-        heading=" Update Employee"
+        heading="Update Employee"
         currentPage="Update Employee"
       />
+
       {error && (
         <Typography color="error" sx={{ mb: 2 }}>
           {error}
         </Typography>
       )}
+
       <form onSubmit={handleSubmit}>
         <Box className="customBox">
           <Grid container spacing={2}>
-            <Grid size={4}>
+            {/* First Name */}
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="First Name"
                 inputType="text"
@@ -149,7 +161,9 @@ const UpdateEmployee = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid size={4}>
+
+            {/* Last Name */}
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Last Name"
                 inputType="text"
@@ -158,7 +172,9 @@ const UpdateEmployee = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid size={4}>
+
+            {/* Gender */}
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Gender"
                 value={employee.gender}
@@ -166,16 +182,20 @@ const UpdateEmployee = () => {
                 options={genderOptions}
               />
             </Grid>
-            <Grid size={4}>
+
+            {/* DOB */}
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
-                label="Dob"
+                label="DOB"
                 inputType="date"
                 name="dob"
                 value={employee.dob}
                 onChange={handleChange}
               />
             </Grid>
-            <Grid size={4}>
+
+            {/* Joining */}
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Joining Date"
                 inputType="date"
@@ -184,16 +204,20 @@ const UpdateEmployee = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid size={4}>
+
+            {/* Employee ID */}
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
-                label="Employee Id"
+                label="Employee ID"
                 inputType="text"
                 name="emp_id"
                 value={employee.emp_id}
                 onChange={handleChange}
               />
             </Grid>
-            <Grid size={4}>
+
+            {/* Email */}
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Email"
                 inputType="text"
@@ -202,22 +226,26 @@ const UpdateEmployee = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid size={4}>
+
+            {/* Phone */}
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Phone"
                 inputType="text"
                 name="phone"
                 value={employee.phone}
-                 onChange={(e) => {
+                onChange={(e) => {
                   const value = e.target.value;
                   if (/^\d{0,10}$/.test(value)) {
                     setemployee((prev) => ({ ...prev, phone: value }));
                   }
                 }}
-                inputProps={{ maxLength: 10 }} //
+                inputProps={{ maxLength: 10 }}
               />
             </Grid>
-            <Grid size={4}>
+
+            {/* ✅ Designation (from API) */}
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <SelectInput
                 label="Designation"
                 value={employee.des}
@@ -226,7 +254,8 @@ const UpdateEmployee = () => {
               />
             </Grid>
 
-            <Grid size={4}>
+            {/* Salary */}
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="Gross Salary"
                 inputType="number"
@@ -236,16 +265,19 @@ const UpdateEmployee = () => {
                 disabled
               />
             </Grid>
-            <Grid size={4}>
+
+            <Grid size={{ xs: 12, md: 4, lg:3 }}>
               <BasicInput
                 label="PF %"
-                name="PF"
                 inputType="number"
+                name="pf_percent"
                 value={pfPercent}
                 onChange={(e) => setPfPercent(e.target.value)}
                 disabled
               />
             </Grid>
+
+            {/* Address */}
             <Grid size={12}>
               <CustomTextarea
                 label="Address"
@@ -257,6 +289,7 @@ const UpdateEmployee = () => {
               />
             </Grid>
           </Grid>
+
           <Button type="submit" variant="contained" sx={{ mt: 3 }}>
             Update Employee
           </Button>
