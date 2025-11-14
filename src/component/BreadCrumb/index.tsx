@@ -24,14 +24,15 @@ const BasicBreadcrumbs: React.FC<BasicBreadcrumbsProps> = ({
 }) => {
   return (
     <Box className="custom-breadcrumb">
-      <Typography
+     
+     <Grid container alignItems="center">
+        <Grid size={10}>
+           <Typography
         variant="h5"
         sx={{ mb: 1, color: "#1c1b54", fontWeight: "600" }}
       >
         {heading}
       </Typography>
-     <Grid container alignItems="center">
-        <Grid size={10}>
           <Box role="presentation" onClick={handleClick} sx={{ mb: 3 }}>
             <Breadcrumbs aria-label="breadcrumb">
               <Link underline="hover" color="rgb(3 35 93 / 60%)" href="/">
@@ -43,7 +44,7 @@ const BasicBreadcrumbs: React.FC<BasicBreadcrumbsProps> = ({
             </Breadcrumbs>
           </Box>
         </Grid>
-        <Grid size={2}>
+        <Grid size={2} textAlign="end">
           <CustomButton type="button" label="Back" />
         </Grid>
       </Grid>

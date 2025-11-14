@@ -60,6 +60,18 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen }) => {
           <ListItemText primary="Dashboard" />
         </ListItem>
 
+         <ListItem
+          component={Link}
+          href="/student_list_practice"
+          sx={{ height: "40px" }}
+          className={`menu-link ${pathname === "/student_list_practice" ? "active" : ""}`}
+        >
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText primary="Student List Test" />
+        </ListItem>
+
         {/* Student Menu */}
         <ListItem
           className="submenu menu-link"

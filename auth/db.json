@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "email": "test@example.com",
+      "password": "123456",
+      "id": 1
+    },
+    {
+      "email": "snssystem.sonu.kushwah@gmail.com",
+      "password": "$2a$10$8ZqxC75ZxA69PnFmDbs2q.WGkkzJmDn3v9RILkFNpYtC5HicU8gM2",
+      "username": "sonu kushwah",
+      "phone": "08358957395",
+      "id": 2
+    }
+  ]
+}

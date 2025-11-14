@@ -55,8 +55,8 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   };
 
   return (
-    <AppBar position="fixed" className="header">
-      <Container maxWidth="xl">
+    <AppBar position="fixed" className="header" style={{padding:"0 24px"}}>
+      {/* <Container maxWidth="xl"> */}
         <Toolbar disableGutters>
           {/* Desktop Logo */}
           <Typography
@@ -175,7 +175,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
             </Menu>
           </Box>
         </Toolbar>
-      </Container>
+      {/* </Container> */}
     </AppBar>
   );
 };

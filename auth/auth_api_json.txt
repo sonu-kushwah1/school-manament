@@ -1,0 +1,3 @@
+
+3.Install JSON Server + JWT
+npm install json-server json-server-auth
